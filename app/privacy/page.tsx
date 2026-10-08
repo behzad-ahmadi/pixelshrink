@@ -89,7 +89,7 @@ export default function PrivacyPage() {
         {BRAND} is a general-purpose utility that does not knowingly collect
         personal information from children. Because the tools require no
         registration and process files locally, children can use them in the
-        same anonymous manner as anyone else. If you believe a child has sent us
+        same way as anyone else — no account, no stored files. If you believe a child has sent us
         personal information via the contact address, let us know and we will
         delete it promptly.
       </p>

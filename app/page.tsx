@@ -211,9 +211,9 @@ export default function HomePage() {
                 </p>
               </div>
               <div>
-                <p className="font-semibold text-slate-900 dark:text-slate-100">No account, no tracking</p>
+                <p className="font-semibold text-slate-900 dark:text-slate-100">No account needed</p>
                 <p className="mt-1">
-                  No signup, no cookies for tool use, no fingerprinting. Optional
+                  No signup and no cookies for tool use. Optional
                   analytics only loads if explicitly configured — otherwise nothing
                   phones home.
                 </p>

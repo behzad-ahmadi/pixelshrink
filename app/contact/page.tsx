@@ -4,7 +4,7 @@ import ContactForm from "./contact-form";
 export const metadata = buildMetadata({
   title: "Contact",
   description:
-    "Contact PixelShrink: report a bug, request a feature, or ask a privacy question. The form opens your email app — no account, no tracking.",
+    "Contact PixelShrink: report a bug, request a feature, or ask a privacy question. The form opens your email app — no account needed.",
   path: "/contact",
 });
 

@@ -13,7 +13,9 @@ const LEGAL_PATHS: Array<{ path: string; priority: number }> = [
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const now = new Date();
+  // Static date: new Date() is not allowed during prerendering
+  // with Cache Components enabled.
+  const now = new Date("2026-10-08T00:00:00Z");
   return [
     {
       url: SITE_URL,
