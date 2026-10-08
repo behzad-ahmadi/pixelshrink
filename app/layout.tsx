@@ -13,6 +13,7 @@ export const metadata: Metadata = {
   },
   description: TAGLINE,
   manifest: "/manifest.json",
+  verification: { google: "Zh10xvxD5-nFc13L8-FQDg30LipGm9wsvLHgWFSW9Fc" },
 };
 
 export const viewport: Viewport = {
