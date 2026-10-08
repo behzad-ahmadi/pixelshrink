@@ -12,6 +12,7 @@ export const metadata: Metadata = {
     template: "%s | PixelShrink",
   },
   description: TAGLINE,
+  manifest: "/manifest.json",
 };
 
 export const viewport: Viewport = {
