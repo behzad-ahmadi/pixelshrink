@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 export const BRAND = "PixelShrink";
 export const TAGLINE = "Free image tools that never upload your files.";
-export const SITE_URL = "https://pixelshrink.app";
+export const SITE_URL = "https://www.pixelshrink.app";
 export const CONTACT_EMAIL = "hello@pixelshrink.app";
 
 export interface ToolLink {
