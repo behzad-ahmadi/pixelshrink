@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Faq } from "@/components/page-bits";
-import { CONVERT_PAIRS, TAGLINE, TOOLS, buildMetadata } from "@/lib/site";
+import { BRAND, CONVERT_PAIRS, TAGLINE, TOOLS, buildMetadata, canonical } from "@/lib/site";
 
 export const metadata: Metadata = buildMetadata({
   title: "Free Image Tools — Compress, Resize, Convert",
@@ -37,6 +37,18 @@ const HOME_FAQS = [
       "JPG for photos and smallest compatible size, PNG when you need transparency or pixel-perfect graphics, WebP for the smallest web-ready files. The convert pages switch between them in one click.",
   },
 ];
+
+const HOME_JSON_LD = {
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  name: `${BRAND} — Free Image Tools`,
+  url: canonical("/"),
+  applicationCategory: "MultimediaApplication",
+  operatingSystem: "Any",
+  offers: { "@type": "Offer", price: "0" },
+  description:
+    "Free in-browser image tools: compress, resize, crop and convert JPG, PNG, and WebP with no uploads and no account.",
+};
 
 const USE_CASES = [
   {
@@ -234,6 +246,7 @@ export default function HomePage() {
           <Faq items={HOME_FAQS} />
         </div>
       </section>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(HOME_JSON_LD) }} />
     </div>
   );
 }

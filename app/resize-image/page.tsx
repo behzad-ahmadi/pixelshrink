@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import Faq from "@/components/Faq";
 import Resizer from "@/components/Resizer";
@@ -144,10 +145,10 @@ export default function ResizeImagePage() {
             <h2>Resizing inside a complete image workflow</h2>
             <p>
               Resizing rarely travels alone — it sits between capture and delivery in a chain where order
-              matters. The professional sequence is: crop first (remove unwanted content so no pixels are
+              matters. The professional sequence is: <Link href="/crop-image">crop first</Link> (remove unwanted content so no pixels are
               wasted), resize second (match the destination dimensions while detail is maximal), sharpen
-              third if your editor supports it (resampling softens micro-contrast slightly), and compress
-              last (spend the byte budget on the final pixel count). Reversing resize and compress is the
+              third if your editor supports it (resampling softens micro-contrast slightly), and <Link href="/compress-image">compress
+              last</Link> (spend the byte budget on the final pixel count). Reversing resize and compress is the
               common amateur error: compressing a giant original discards detail the resizer then averages
               from damaged data. Similarly, resizing the same file repeatedly accumulates generational
               softness — always return to the largest clean source for each new size rather than chaining

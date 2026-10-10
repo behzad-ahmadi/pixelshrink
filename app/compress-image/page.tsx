@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import Compressor from "@/components/Compressor";
 import Faq from "@/components/Faq";
@@ -107,7 +108,7 @@ export default function CompressImagePage() {
               “.jpg” uploads. PNG is lossless and therefore the largest: a photo saved as PNG can be five to
               ten times bigger than the same photo as JPEG. Reserve PNG for images that must be pixel-perfect —
               line art, UI screenshots with small text, images with transparency — and never for plain
-              photographs unless a system forces it.
+              photographs unless a system forces it. When the format itself is the problem, <Link href="/convert-image">convert formats</Link> first, and when the framing wastes pixels, <Link href="/crop-image">crop tightly</Link> before compressing.
             </p>
             <h2>How to compress an image in four steps</h2>
             <ol>
@@ -130,7 +131,7 @@ export default function CompressImagePage() {
             </ol>
             <h2>Pro tips for dramatically smaller files</h2>
             <p>
-              The biggest wins come before you touch the quality slider. First, resize oversized images: a
+              The biggest wins come before you touch the quality slider. First, <Link href="/resize-image">resize oversized images</Link>: a
               4000-pixel phone photo destined for a 1200-pixel web slot carries ten times the pixels it needs,
               and no quality setting compensates for that. Shrinking dimensions first, then compressing, routinely
               beats compressing alone by a factor of three. Second, prefer WebP for anything you publish

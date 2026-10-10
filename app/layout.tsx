@@ -49,10 +49,20 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               "@context": "https://schema.org",
-              "@type": "WebSite",
-              name: BRAND,
-              url: SITE_URL,
-              description: TAGLINE,
+              "@graph": [
+                {
+                  "@type": "WebSite",
+                  name: BRAND,
+                  url: SITE_URL,
+                  description: TAGLINE,
+                },
+                {
+                  "@type": "Organization",
+                  name: BRAND,
+                  url: SITE_URL,
+                  logo: `${SITE_URL}/icon.png`,
+                },
+              ],
             }),
           }}
         />

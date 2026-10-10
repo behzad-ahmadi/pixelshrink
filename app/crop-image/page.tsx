@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import Cropper from "@/components/Cropper";
 import Faq from "@/components/Faq";
@@ -93,8 +94,8 @@ export default function CropImagePage() {
               16:9 widescreen dominates video thumbnails, slide decks, hero banners, and wallpapers — frames
               where horizontal sweep carries the message. And Free mode covers everything bespoke: marketplace
               image slots with odd ratios, banner crops, or artistic compositions that no standard fits. When
-              a destination names dimensions (1080 × 1350, say), crop to the ratio first and resize to the
-              pixels after — ratio from the cropper, pixels from the resizer, bytes from the compressor.
+              a destination names dimensions (1080 × 1350, say), crop to the ratio first and <Link href="/resize-image">resize to the
+              pixels</Link> after — ratio from the cropper, pixels from the resizer, bytes from the <Link href="/compress-image">compressor</Link>.
             </p>
             <h2>How to crop an image in four steps</h2>
             <ol>
