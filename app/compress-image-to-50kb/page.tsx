@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import Compressor from "@/components/Compressor";
 import Faq from "@/components/Faq";
@@ -61,7 +62,7 @@ export default function CompressTo50KBPage() {
   return (
     <>
       <div className="mx-auto w-full max-w-4xl px-4 pt-6 sm:px-6">
-        <Breadcrumbs items={[{ label: "Compress Image", href: "/compress-image" }, { label: "Compress to 50KB" }]} />
+        <Breadcrumbs items={[{ label: "Compress Image", href: "/image-compressor" }, { label: "Compress to 50KB" }]} />
       </div>
       <ToolShell
         title="Compress Image to 50KB"
@@ -150,6 +151,12 @@ export default function CompressTo50KBPage() {
               if quality inspection ever shows mushy text at 50KB, the answer is a tighter crop or a cleaner
               source photo — never a different compressor. The math of 50KB is fixed; the only variables are
               how many pixels you ask it to describe and how much noise you leave in the frame.
+            </p>
+            <p>
+              Need a different limit? Open <Link href="/compress-image">resize and compress image online free</Link>{" "}
+              to choose your own file-size budget and optional width and height in one run. Keep the
+              aspect ratio locked to preserve proportions, and verify the final dimensions and target
+              status after processing.
             </p>
           </>
         }

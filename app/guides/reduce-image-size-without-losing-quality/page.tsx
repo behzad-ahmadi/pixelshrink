@@ -102,6 +102,11 @@ export default function ReduceImageSizeGuidePage() {
           no visible difference. Every step works with the free tools on this
           site, processed privately in your browser.
         </p>
+        <p className="mt-3 text-base leading-relaxed text-slate-600 dark:text-slate-300">
+          Ready to try it? Open <Link href="/compress-image" className="text-blue-700 hover:underline dark:text-blue-400">resize and compress image online free</Link>{" "}
+          to set pixel dimensions, keep the aspect ratio or choose an exact size, and apply a quality
+          setting or KB target in the same run.
+        </p>
       </header>
 
       <nav aria-label="Guide contents" className="mt-8 rounded-2xl border border-slate-200 bg-slate-50 p-5 dark:bg-slate-900 dark:border-slate-700">
@@ -183,8 +188,8 @@ export default function ReduceImageSizeGuidePage() {
           re-saved at 70%, looks worse than a single pass at the same setting.
           Second, PNG has no quality slider because it is lossless — if a PNG
           is too big, the answer is converting to JPEG or WebP, not hunting
-          for a PNG quality option that does not exist. Open the{" "}
-          <Link href="/compress-image">compress image tool</Link>, set 85%,
+          for a PNG quality option that does not exist. Open{" "}
+          <Link href="/compress-image">resize and compress image online free</Link>, set 85%,
           and judge with your own eyes before touching anything else.
         </p>
 
@@ -280,8 +285,8 @@ export default function ReduceImageSizeGuidePage() {
           Everything in this workflow runs locally in your browser on{" "}
           {BRAND}: no uploads, no accounts, no watermarks, no per-day limits.
           Your files never leave your device, EXIF data is stripped on export,
-          and you can re-run any step as often as you like. Start with the{" "}
-          <Link href="/compress-image">compress image tool</Link> for the
+          and you can re-run any step as often as you like. Start with{" "}
+          <Link href="/compress-image">resize and compress image online free</Link> for the
           general case, or jump straight to the exact-KB page your form
           demands. Smaller images, same visible quality, five minutes of work.
         </p>
@@ -290,7 +295,7 @@ export default function ReduceImageSizeGuidePage() {
       <aside aria-label="Try the tools" className="mt-10 rounded-2xl border border-blue-200 bg-blue-50 p-5 sm:p-6 dark:bg-blue-950 dark:border-blue-800">
         <h2 className="text-lg font-bold text-slate-900 dark:text-slate-100">Try it now — free, private, no signup</h2>
         <ul className="mt-3 grid gap-2 text-sm">
-          <li><Link href="/compress-image" className="font-medium text-blue-700 hover:underline dark:text-blue-400">Compress Image — quality slider or exact KB target →</Link></li>
+          <li><Link href="/compress-image" className="font-medium text-blue-700 hover:underline dark:text-blue-400">resize and compress image online free</Link></li>
           <li><Link href="/resize-image" className="font-medium text-blue-700 hover:underline dark:text-blue-400">Resize Image — dimensions &amp; presets →</Link></li>
           <li><Link href="/convert-image" className="font-medium text-blue-700 hover:underline dark:text-blue-400">Convert Image — JPG, PNG &amp; WebP →</Link></li>
         </ul>

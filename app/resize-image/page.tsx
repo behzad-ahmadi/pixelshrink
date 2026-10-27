@@ -83,6 +83,14 @@ export default function ResizeImagePage() {
               system — upload validators, social pipelines, page-speed scores — rewards images that arrive at
               the right size.
             </p>
+            <h2>Resize and compress an image for an upload limit</h2>
+            <p>
+              A form can require both specific pixel dimensions and a maximum file size. To set both in
+              one run, open <Link href="/compress-image">resize and compress image online free</Link>.
+              Enter width and height, choose an aspect-ratio setting, then select quality or a KB target.
+              Custom dimensions stay fixed during compression; if the target cannot be met, check the
+              result and adjust your settings. Processing stays on your device with no account or upload.
+            </p>
             <h2>Aspect ratio: the geometry you must respect</h2>
             <p>
               Aspect ratio is the relationship between width and height, and breaking it is the classic
@@ -147,8 +155,9 @@ export default function ResizeImagePage() {
               Resizing rarely travels alone — it sits between capture and delivery in a chain where order
               matters. The professional sequence is: <Link href="/crop-image">crop first</Link> (remove unwanted content so no pixels are
               wasted), resize second (match the destination dimensions while detail is maximal), sharpen
-              third if your editor supports it (resampling softens micro-contrast slightly), and <Link href="/compress-image">compress
-              last</Link> (spend the byte budget on the final pixel count). Reversing resize and compress is the
+              third if your editor supports it (resampling softens micro-contrast slightly), and compress
+              last with <Link href="/compress-image">resize and compress image online free</Link> to spend
+              the byte budget on the final pixel count. Reversing resize and compress is the
               common amateur error: compressing a giant original discards detail the resizer then averages
               from damaged data. Similarly, resizing the same file repeatedly accumulates generational
               softness — always return to the largest clean source for each new size rather than chaining

@@ -1,166 +1,212 @@
-import type { Metadata } from "next";
-import Link from "next/link";
-import Breadcrumbs from "@/components/Breadcrumbs";
-import Compressor from "@/components/Compressor";
-import Faq from "@/components/Faq";
-import ToolShell from "@/components/ToolShell";
-import { buildMetadata, canonical } from "@/lib/site";
+import type { Metadata } from 'next'
+import Link from 'next/link'
+import Breadcrumbs from '@/components/Breadcrumbs'
+import Compressor from '@/components/Compressor'
+import Faq from '@/components/Faq'
+import ToolShell from '@/components/ToolShell'
+import { buildMetadata, canonical } from '@/lib/site'
 
 export const metadata: Metadata = buildMetadata({
-  title: "Compress Image — Shrink JPG, PNG & WebP Online",
+  title: 'Resize and Compress Image Online Free',
   description:
-    "Free online image compressor. Shrink JPG, PNG & WebP with a quality slider or exact KB target. Private, in-browser, no upload.",
-  path: "/compress-image",
-});
+    'Set custom width and height, preserve aspect ratio, and compress JPG, PNG & WebP online for free. Choose quality or KB targets. No signup or uploads.',
+  path: '/compress-image',
+})
 
 const FAQS = [
   {
-    question: "How does online image compression work?",
+    question: 'Can I resize and compress an image online for free?',
     answer:
-      "JPEG and WebP are lossy formats: the encoder discards high-frequency detail your eyes barely notice, then stores what remains very efficiently. Lowering the quality setting discards more detail, so the file shrinks. PNG is lossless, so it can only shrink by reducing dimensions or color complexity. This tool runs the same encoders your browser uses for the web, entirely on your device.",
+      'Yes. Enter a width, height, or both in Image dimensions, then choose a quality setting or KB target. The tool resizes and compresses each image in one run, locally in your browser, with no account or watermark.',
   },
   {
-    question: "What quality setting should I choose?",
+    question: 'Does compressing an image always change its dimensions?',
     answer:
-      "For photographs, 70–85% is the sweet spot: files typically drop 60–80% with differences visible only when pixel-peeping. Below 60%, skies and skin can show banding and blocky artifacts. For graphics with text or sharp lines, prefer PNG or WebP at 90%+ to keep edges crisp.",
+      'No. Leave both dimension fields blank to keep the original size in quality mode. Enter dimensions to resize before compression. With aspect ratio locked, each image fits within the entered width and height. When custom dimensions are entered, target mode keeps them and reports a missed KB target rather than shrinking them further.',
   },
   {
-    question: "Should I choose JPEG, PNG, or WebP output?",
+    question: 'How do I set an exact width and height?',
     answer:
-      "Use JPEG for maximum compatibility — every device and portal accepts it. Use WebP when you control the destination (your own site, modern apps) because it is roughly 25–35% smaller than JPEG at equal quality. Use PNG only when you need transparency or pixel-perfect graphics like logos and screenshots with text.",
+      'Enter both pixel dimensions and turn off Keep aspect ratio to use that exact width and height. This can stretch the image if the proportions differ from the original. To preserve proportions, leave the lock on: the result fits inside your chosen dimensions. Each output dimension can be up to 8000 pixels.',
   },
   {
-    question: "Are my images uploaded to a server?",
+    question: 'How does online image compression work?',
     answer:
-      "No. Your file is decoded, compressed, and re-encoded by JavaScript running in your own browser tab. Nothing is transmitted anywhere, which makes the tool safe for private documents like IDs and signatures.",
+      'The tool decodes your image and re-encodes it in your browser. Lower JPEG or WebP quality settings can reduce file size by discarding detail. PNG output is lossless at the chosen dimensions, so lowering a quality setting does not make it smaller; use a smaller canvas or another format when appropriate.',
   },
   {
-    question: "Why is my PNG still large after compressing?",
+    question: 'What quality setting should I choose?',
     answer:
-      "PNG compression is lossless, so quality sliders cannot shrink it — the pixels must be stored exactly. Switch to the exact-KB target mode, which reduces dimensions until the PNG fits, or convert photographic PNGs to JPEG/WebP, which are typically 5–10x smaller for photos.",
+      'Start around 80–85% for JPG or WebP photos, then compare the result with your original at full size. Increase quality if faces, small text, or gradients look damaged. The best setting and file-size savings depend on the image, output format, and browser.',
   },
   {
-    question: "Will compression remove EXIF and metadata?",
+    question: 'Should I choose JPEG, PNG, or WebP output?',
     answer:
-      "Yes. Browser encoders write only pixel data, so camera settings, GPS coordinates, and timestamps in the original EXIF block are stripped from the output. That shrinks the file slightly and protects your privacy when sharing photos publicly.",
+      'JPG is a common choice for photos and upload forms that require JPEG. WebP supports transparency and is useful for web images. PNG preserves pixel detail and transparency at the output dimensions, but photographic PNGs can be large. Always check which formats your destination accepts.',
   },
-];
+  {
+    question: 'Are my images uploaded to a server?',
+    answer:
+      'No. Your image is decoded, resized when needed, and compressed locally in your browser. The image file is never uploaded to PixelShrink. No account is required to use the tool.',
+  },
+  {
+    question: 'Why is my PNG still large after compressing?',
+    answer:
+      'PNG does not use the lossy quality slider. Enter smaller dimensions to make a smaller PNG, or leave dimensions blank to let target mode reduce them automatically. If custom dimensions are fixed and the target is missed, choose a larger KB target or try JPG/WebP. JPG replaces transparency with a white background.',
+  },
+  {
+    question: 'Will compression remove EXIF and metadata?',
+    answer:
+      'Yes. Browser encoders write only pixel data, so camera settings, GPS coordinates, and timestamps in the original EXIF block are stripped from the output. That shrinks the file slightly and protects your privacy when sharing photos publicly.',
+  },
+]
 
 const JSON_LD = {
-  "@context": "https://schema.org",
-  "@type": "WebApplication",
-  name: "Compress Image — PixelShrink",
-  url: canonical("/compress-image"),
-  applicationCategory: "MultimediaApplication",
-  operatingSystem: "Any",
-  offers: { "@type": "Offer", price: "0" },
+  '@context': 'https://schema.org',
+  '@type': 'WebApplication',
+  name: 'Resize and Compress Image Online Free — PixelShrink',
+  url: canonical('/compress-image'),
+  applicationCategory: 'MultimediaApplication',
+  operatingSystem: 'Any',
+  offers: { '@type': 'Offer', price: '0' },
   description:
-    "Free in-browser image compressor with a quality slider and exact KB target modes for JPEG, PNG, and WebP.",
-};
+    'Resize JPG, PNG, and WebP images with custom pixel dimensions and aspect-ratio control, then compress with quality settings or a KB target in one browser-based workflow. Free, no signup or image uploads.',
+}
 
 export default function CompressImagePage() {
   return (
     <>
-      <div className="mx-auto w-full max-w-4xl px-4 pt-6 sm:px-6">
-        <Breadcrumbs items={[{ label: "Compress Image" }]} />
+      <div className='mx-auto w-full max-w-4xl px-4 pt-6 sm:px-6'>
+        <Breadcrumbs items={[{ label: 'Resize and Compress Image' }]} />
       </div>
       <ToolShell
-        title="Compress Image Online"
-        intro="Shrink JPG, PNG, and WebP files in seconds with a quality slider or an exact kilobyte target. Free, private, and entirely in your browser."
-        relatedExclude="/compress-image"
+        title='Resize and Compress Images for Free'
+        intro='Set your image width and height, keep the aspect ratio or choose exact dimensions, then compress JPG, PNG, and WebP files in one step. Free, with no signup, watermark, or image uploads.'
+        relatedExclude='/compress-image'
         guide={
           <>
-            <h2>How image compression actually works</h2>
+            <h2>How to resize and compress an image online for free</h2>
             <p>
-              Every digital photo carries far more data than your eyes can perceive. A 12-megapixel phone photo
-              stores 36 million color values, including subtle noise in shadows, micro-texture in skies, and
-              high-frequency detail that vanishes the moment an image is displayed at normal size. Lossy
-              compression exploits this gap: the encoder transforms the image into frequency components, keeps
-              the ones that matter visually, and quantizes the rest away. The quality percentage you choose
-              controls how aggressive that quantization is. At 85%, a typical JPEG keeps virtually all visible
-              detail while discarding roughly two-thirds of the bytes. At 60%, it starts merging similar tones
-              into visible blocks — fine for thumbnails, risky for hero images. Understanding this trade-off is
-              the whole skill of compressing images well: you are deciding how much invisible data to throw
-              away, and the right answer depends entirely on where the image will be seen.
+              A smaller image can mean fewer pixels, fewer kilobytes, or both.
+              Use this free online image compressor when a photo is too large
+              for an upload form, email attachment, or web page. Set pixel
+              dimensions and compression together in the tool above. If you only
+              need to reduce file size, leave the dimension fields blank or open
+              the dedicated{' '}
+              <Link href='/image-compressor'>image compressor</Link>.
             </p>
-            <h2>Quality slider or exact KB target?</h2>
-            <p>
-              This tool offers two compression modes because different situations demand different guarantees.
-              The quality slider is the photographer&apos;s mode: you pick a visual standard — say 80% — and
-              accept whatever file size results. It is ideal when appearance matters most, such as portfolio
-              images, blog illustrations, or prints. Every image compressed at the same quality looks
-              consistently good, even though file sizes vary with content. The exact-KB target mode is the
-              form-filler&apos;s mode: you declare a byte budget — 20KB, 50KB, 100KB — and the tool binary
-              searches encoder quality to land at the highest quality that fits. If even the lowest usable
-              quality cannot squeeze the pixels into your budget, it progressively scales dimensions down
-              until the target is met. Use target mode whenever a portal, exam form, or upload limit dictates
-              the size; use quality mode whenever your eyes dictate it.
-            </p>
-            <h2>Choosing the right output format</h2>
-            <p>
-              Format choice often matters more than the quality number. JPEG is the universal default: every
-              browser, phone, printer, and government portal since the 1990s reads it, and its encoder is
-              superb for photographs. Its weaknesses are graphics with sharp edges — text screenshots, logos,
-              charts — where it smears ringing artifacts around high-contrast boundaries, and its lack of
-              transparency support. WebP fixes both problems partially: it compresses photos 25–35% smaller
-              than JPEG at equal visual quality, supports transparency, and handles graphics more gracefully.
-              Its only drawback is compatibility with older or bureaucratic systems that explicitly demand
-              “.jpg” uploads. PNG is lossless and therefore the largest: a photo saved as PNG can be five to
-              ten times bigger than the same photo as JPEG. Reserve PNG for images that must be pixel-perfect —
-              line art, UI screenshots with small text, images with transparency — and never for plain
-              photographs unless a system forces it. When the format itself is the problem, <Link href="/convert-image">convert formats</Link> first, and when the framing wastes pixels, <Link href="/crop-image">crop tightly</Link> before compressing.
-            </p>
-            <h2>How to compress an image in four steps</h2>
             <ol>
               <li>
-                <strong>Drop your image</strong> onto the tool above or click to browse. Anything up to 50MB
-                works, including JPEG, PNG, WebP, GIF, BMP, and AVIF sources.
+                <strong>Choose your images.</strong> Drop up to 10 files into
+                the tool, with a maximum of 50MB per file. Supported inputs
+                include JPG, PNG, WebP, GIF, BMP, and AVIF.
               </li>
               <li>
-                <strong>Pick a mode.</strong> Drag the quality slider while watching the before/after sizes, or
-                switch to target mode and type your KB budget for an guaranteed fit.
+                <strong>Set the dimensions.</strong> Enter width, height, or
+                both. Keep aspect ratio on to fit each image inside those
+                bounds, or turn it off to use an exact width and height. Leave
+                both blank when you want to keep the original size.
               </li>
               <li>
-                <strong>Choose the output format.</strong> Stick with JPEG for uploads to third parties; choose
-                WebP for your own website where every kilobyte of page weight counts.
+                <strong>Choose quality or a KB target.</strong> Both modes use
+                your selected dimensions. If a KB target cannot be met at that
+                size, the tool tells you. Choose JPG, PNG, or WebP output.
               </li>
               <li>
-                <strong>Download and verify.</strong> Open the result at full size once. If faces, text, or
-                product details look soft, re-compress five quality points higher — it costs seconds.
+                <strong>Compare and download.</strong> Check the original and
+                output sizes, dimensions, and preview. Verify the target status
+                and small details before downloading individual images or a ZIP
+                of completed results.
               </li>
             </ol>
-            <h2>Pro tips for dramatically smaller files</h2>
+            <h2>Resizing vs. compression: pixels and kilobytes</h2>
             <p>
-              The biggest wins come before you touch the quality slider. First, <Link href="/resize-image">resize oversized images</Link>: a
-              4000-pixel phone photo destined for a 1200-pixel web slot carries ten times the pixels it needs,
-              and no quality setting compensates for that. Shrinking dimensions first, then compressing, routinely
-              beats compressing alone by a factor of three. Second, prefer WebP for anything you publish
-              yourself — the same photo at the same visual quality is roughly a third lighter than JPEG, which
-              directly improves page-load times and search rankings. Third, remember that re-encoding strips
-              EXIF metadata automatically, so photos of people or places lose their embedded GPS and camera
-              data — a quiet privacy bonus when sharing publicly. Finally, keep your originals: lossy
-              compression is a one-way street, so archive the full-quality file and treat compressed copies as
-              disposable derivatives for specific destinations.
+              Resizing changes width and height; compression changes how the
+              image is encoded. For example, resizing a 4000 × 3000 photo to
+              1000 × 750 leaves one-sixteenth of the original pixel count. The
+              resulting file size still depends on its content, format, and
+              quality. A 100KB target does not specify pixel dimensions, and a
+              1000-pixel width does not guarantee a 100KB file.
             </p>
-            <h2>Quality sweet spots worth memorizing</h2>
             <p>
-              After compressing thousands of images, practitioners converge on the same numbers. Use 85% for
-              hero images and anything viewers will inspect closely. Use 75–80% for article illustrations,
-              product photos, and social posts — the savings are large and the difference is essentially
-              invisible on phones. Use 60–70% for thumbnails, avatars, and background textures where the image
-              renders small. Drop to 50% only for strict byte targets where fitting matters more than fidelity,
-              and pair it with dimension reduction rather than quality reduction alone. For PNG graphics with
-              flat colors, none of this applies — export at full quality and shrink the canvas instead, since
-              PNG quality sliders change nothing. Internalize these five bands and you will rarely need to
-              experiment more than once per image.
+              When a form limits both dimensions and file size, enter the
+              required pixels and select a KB target above. Resizing happens
+              before encoding in the same run. Keep the aspect ratio locked to
+              avoid stretching. Enlarging a small image can soften detail. If
+              the required shape differs from your original,{' '}
+              <Link href='/crop-image'>crop the image</Link> before resizing.
+            </p>
+            <h2>Choose a quality setting or a file-size target</h2>
+            <p>
+              Use the quality slider when you want control over appearance at
+              your chosen dimensions. Start around 80–85% for JPG and WebP
+              photos and inspect faces, text, and gradients. Lower quality can
+              introduce visible artifacts; savings vary between files.
+            </p>
+            <p>
+              Use Exact KB target for an upload limit. With custom dimensions,
+              it searches quality settings while keeping the chosen size; a
+              missed target means you need a larger budget, smaller dimensions,
+              or another format. When both dimension fields are blank, target
+              mode can shrink dimensions automatically. Check the final result
+              rather than assuming every file fits. For common limits, use the
+              presets to{' '}
+              <Link href='/compress-image-to-20kb'>compress to 20KB</Link>,{' '}
+              <Link href='/compress-image-to-50kb'>50KB</Link>, or{' '}
+              <Link href='/compress-image-to-100kb'>100KB</Link>.
+            </p>
+            <h2>Which image format should you choose?</h2>
+            <ul>
+              <li>
+                <strong>JPG:</strong> a common choice for photos and forms that
+                require JPEG. Transparency is replaced with a white background.
+              </li>
+              <li>
+                <strong>WebP:</strong> supports transparency and adjustable
+                compression for web images. Confirm that the receiving app or
+                website accepts it.
+              </li>
+              <li>
+                <strong>PNG:</strong> preserves pixel detail and transparency at
+                the output dimensions. The quality slider does not reduce PNG
+                size; choose smaller dimensions to reduce its pixel count.
+              </li>
+            </ul>
+            <p>
+              If the file type is the main problem, the{' '}
+              <Link href='/convert-image'>image converter</Link> can help you
+              switch formats. Animated inputs are exported as a still image by
+              these canvas-based tools; they do not preserve the animation.
+            </p>
+            <h2>Free image processing that stays on your device</h2>
+            <p>
+              There is no signup, watermark, or image upload. Your browser
+              decodes and processes the files locally, and re-encoding strips
+              the original EXIF metadata. Keep an untouched original if you need
+              camera settings or location data later. JPEG and WebP compression
+              can discard detail, so compare the exported image at its intended
+              display size before replacing an original. For more advice, read
+              our{' '}
+              <Link href='/guides/reduce-image-size-without-losing-quality'>
+                guide to reducing image size without visible quality loss
+              </Link>
+              .
             </p>
           </>
         }
         faq={<Faq items={FAQS} />}
       >
-        <Compressor defaultMode="quality" defaultQuality={80} defaultTargetKB={100} />
+        <Compressor
+          enableResize
+          defaultMode='quality'
+          defaultQuality={80}
+          defaultTargetKB={100}
+        />
       </ToolShell>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(JSON_LD) }} />
+      <script
+        type='application/ld+json'
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(JSON_LD) }}
+      />
     </>
-  );
+  )
 }

@@ -15,9 +15,15 @@ export interface ToolLink {
 export const TOOLS: ToolLink[] = [
   {
     href: "/compress-image",
+    label: "resize and compress image online free",
+    short: "Resize & compress",
+    description: "Set pixel dimensions and compress JPG, PNG, and WebP with quality controls or a KB target in one step.",
+  },
+  {
+    href: "/image-compressor",
     label: "Compress Image",
     short: "Compress",
-    description: "Shrink JPEG, PNG, and WebP files with a quality slider or an exact KB target.",
+    description: "Shrink JPG, PNG, and WebP with a quality slider or KB target. Keep original dimensions in quality mode.",
   },
   {
     href: "/resize-image",
@@ -90,7 +96,8 @@ export interface NavItem {
 }
 
 export const HEADER_NAV: NavItem[] = [
-  { href: "/compress-image", label: "Compress" },
+  { href: "/compress-image", label: "resize and compress image online free" },
+  { href: "/image-compressor", label: "Compress" },
   { href: "/resize-image", label: "Resize" },
   { href: "/convert-image", label: "Convert" },
   { href: "/crop-image", label: "Crop" },

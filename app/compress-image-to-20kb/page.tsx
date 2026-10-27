@@ -61,7 +61,7 @@ export default function CompressTo20KBPage() {
   return (
     <>
       <div className="mx-auto w-full max-w-4xl px-4 pt-6 sm:px-6">
-        <Breadcrumbs items={[{ label: "Compress Image", href: "/compress-image" }, { label: "Compress to 20KB" }]} />
+        <Breadcrumbs items={[{ label: "Compress Image", href: "/image-compressor" }, { label: "Compress to 20KB" }]} />
       </div>
       <ToolShell
         title="Compress Image to 20KB"

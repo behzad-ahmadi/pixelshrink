@@ -233,19 +233,63 @@ export interface TargetResult {
   scaledDown: boolean;
 }
 
+export interface ResizeSettings {
+  width?: number;
+  height?: number;
+  keepAspectRatio: boolean;
+}
+
+/** Resolve each batch image independently so its own aspect ratio is preserved. */
+export function resizeDimensions(
+  originalWidth: number,
+  originalHeight: number,
+  { width, height, keepAspectRatio }: ResizeSettings,
+): { width: number; height: number } {
+  for (const dimension of [width, height]) {
+    if (dimension !== undefined && (!Number.isInteger(dimension) || dimension < 1 || dimension > 8000)) {
+      throw new ImageEngineError("Enter whole-number dimensions between 1 and 8000 pixels, or leave them blank.", "size");
+    }
+  }
+  if (width === undefined && height === undefined) return { width: originalWidth, height: originalHeight };
+  const scale = Math.min(
+    width === undefined ? Infinity : width / originalWidth,
+    height === undefined ? Infinity : height / originalHeight,
+  );
+  const dimensions = keepAspectRatio
+    ? { width: Math.max(1, Math.round(originalWidth * scale)), height: Math.max(1, Math.round(originalHeight * scale)) }
+    : { width: width ?? originalWidth, height: height ?? originalHeight };
+  if (dimensions.width > 8000 || dimensions.height > 8000) {
+    throw new ImageEngineError("The resized image must fit within 8000 × 8000 pixels. Enter a smaller dimension.", "size");
+  }
+  return dimensions;
+}
+
+interface TargetOptions {
+  width?: number;
+  height?: number;
+  /** Preserve explicitly selected dimensions even if the byte target cannot be met. */
+  allowDimensionReduction?: boolean;
+}
+
 /**
  * Hit an exact byte target with binary search over encoder quality, then
  * fall back to progressively smaller dimensions if quality alone cannot
- * get there (typical for PNG or very small targets like 20KB).
+ * get there (typical for PNG or very small targets like 20KB), unless
+ * allowDimensionReduction is false for explicitly selected dimensions.
  */
 export async function compressToTargetBytes(
   image: HTMLImageElement,
   targetBytes: number,
   mime: OutputMime,
   startQuality = 0.9,
+  options: TargetOptions = {},
 ): Promise<TargetResult> {
-  let width = image.naturalWidth;
-  let height = image.naturalHeight;
+  const initialWidth = options.width ?? image.naturalWidth;
+  const initialHeight = options.height ?? image.naturalHeight;
+  let width = initialWidth;
+  let height = initialHeight;
+  const allowDimensionReduction = options.allowDimensionReduction ?? true;
+  const scaledDown = () => width !== initialWidth || height !== initialHeight;
 
   // JPEG has no alpha channel: flatten transparency onto white before
   // encoding, otherwise transparent pixels export as black.
@@ -258,14 +302,14 @@ export async function compressToTargetBytes(
   if (mime === "image/png") {
     for (let attempt = 0; attempt < 12; attempt += 1) {
       const blob = await encodeCanvas(drawForOutput(), mime, 1);
-      if (blob.size <= targetBytes || width <= 16 || height <= 16) {
-        return { blob, quality: 1, width, height, scaledDown: attempt > 0 };
+      if (blob.size <= targetBytes || !allowDimensionReduction || width <= 16 || height <= 16) {
+        return { blob, quality: 1, width, height, scaledDown: scaledDown() };
       }
       width = Math.floor(width * 0.88);
       height = Math.floor(height * 0.88);
     }
     const blob = await encodeCanvas(drawForOutput(), mime, 1);
-    return { blob, quality: 1, width, height, scaledDown: true };
+    return { blob, quality: 1, width, height, scaledDown: scaledDown() };
   }
 
   for (let scale = 0; scale < 10; scale += 1) {
@@ -276,19 +320,20 @@ export async function compressToTargetBytes(
       const q = (low + high) / 2;
       const blob = await encodeCanvas(drawForOutput(), mime, q);
       if (blob.size <= targetBytes) {
-        best = { blob, quality: q, width, height, scaledDown: scale > 0 };
+        best = { blob, quality: q, width, height, scaledDown: scaledDown() };
         low = q;
       } else {
         high = q;
       }
     }
     if (best) return best;
-    width = Math.floor(width * 0.88);
-    height = Math.floor(height * 0.88);
+    if (!allowDimensionReduction) break;
+    width = Math.max(1, Math.floor(width * 0.88));
+    height = Math.max(1, Math.floor(height * 0.88));
     if (width < 16 || height < 16) break;
   }
   const blob = await encodeCanvas(drawForOutput(), mime, 0.05);
-  return { blob, quality: 0.05, width, height, scaledDown: true };
+  return { blob, quality: 0.05, width, height, scaledDown: scaledDown() };
 }
 
 export function downloadBlob(blob: Blob, filename: string): void {

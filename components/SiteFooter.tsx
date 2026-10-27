@@ -25,7 +25,7 @@ export default function SiteFooter() {
         <nav aria-label="Tools">
           <p className="text-sm font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400">Tools</p>
           <ul className="mt-3 grid gap-2 text-sm">
-            {[...TOOLS.slice(0, 4), ...CONVERT_PAIRS].map((tool) => (
+            {[...TOOLS.slice(0, 5), ...CONVERT_PAIRS].map((tool) => (
               <li key={tool.href}>
                 <Link href={tool.href} className="text-slate-600 hover:text-blue-700 hover:underline dark:text-slate-300 dark:hover:text-blue-300">
                   {tool.label}

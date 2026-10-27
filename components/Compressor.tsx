@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
   ImageEngineError,
   compressToTargetBytes,
@@ -11,9 +11,11 @@ import {
   formatBytes,
   loadImageFile,
   revokeLoadedImage,
+  resizeDimensions,
   savingsPercent,
   withExtension,
   type OutputMime,
+  type ResizeSettings,
 } from "@/lib/image-engine";
 import { downloadZip } from "@/lib/batch";
 import { trackEvent } from "@/lib/analytics";
@@ -23,6 +25,7 @@ interface CompressorProps {
   defaultTargetKB?: number;
   lockTargetKB?: boolean;
   defaultQuality?: number;
+  enableResize?: boolean;
 }
 
 interface CompressResult {
@@ -34,6 +37,7 @@ interface CompressResult {
   height: number;
   scaledDown: boolean;
   mime: OutputMime;
+  customDimensions: boolean;
 }
 
 interface BatchItem {
@@ -68,11 +72,29 @@ export default function Compressor({
   defaultTargetKB = 100,
   lockTargetKB = false,
   defaultQuality = 80,
+  enableResize = false,
 }: CompressorProps) {
   const [mode, setMode] = useState<"quality" | "target">(defaultMode);
   const [quality, setQuality] = useState<number>(defaultQuality);
   const [targetKB, setTargetKB] = useState<number>(defaultTargetKB);
   const [format, setFormat] = useState<OutputMime>("image/jpeg");
+  const [resizeWidth, setResizeWidth] = useState("");
+  const [resizeHeight, setResizeHeight] = useState("");
+  const [keepAspectRatio, setKeepAspectRatio] = useState(true);
+  const resizeSettings = useMemo<ResizeSettings | undefined>(() => enableResize ? {
+    width: resizeWidth === "" ? undefined : Number(resizeWidth),
+    height: resizeHeight === "" ? undefined : Number(resizeHeight),
+    keepAspectRatio,
+  } : undefined, [enableResize, keepAspectRatio, resizeHeight, resizeWidth]);
+  let resizeError: string | null = null;
+  if (resizeSettings) {
+    try {
+      resizeDimensions(1, 1, resizeSettings);
+    } catch (err) {
+      resizeError = errorMessage(err);
+    }
+  }
+  const outputPrefix = enableResize ? "resized-compressed" : "compressed";
   const [items, setItems] = useState<BatchItem[]>([]);
   const [activeId, setActiveId] = useState<number | null>(null);
   const [working, setWorking] = useState(false);
@@ -111,17 +133,23 @@ export default function Compressor({
   }, []);
 
   const compressOne = useCallback(
-    async (file: File, m: "quality" | "target", q: number, kb: number, mime: OutputMime) => {
+    async (file: File, m: "quality" | "target", q: number, kb: number, mime: OutputMime, resize?: ResizeSettings) => {
       const image = await loadImageFile(file);
       try {
         let blob: Blob;
         let outQuality = q / 100;
-        let width = image.width;
-        let height = image.height;
+        const dimensions = resize ? resizeDimensions(image.width, image.height, resize) : image;
+        const customDimensions = resize?.width !== undefined || resize?.height !== undefined;
+        let width = dimensions.width;
+        let height = dimensions.height;
         let scaledDown = false;
         if (m === "target") {
           const targetBytes = Math.max(1, Math.round(kb * 1024));
-          const r = await compressToTargetBytes(image.element, targetBytes, mime, 0.9);
+          const r = await compressToTargetBytes(image.element, targetBytes, mime, 0.9, {
+            width,
+            height,
+            allowDimensionReduction: !customDimensions,
+          });
           blob = r.blob;
           outQuality = r.quality;
           width = r.width;
@@ -132,7 +160,7 @@ export default function Compressor({
           if (mime === "image/jpeg") flattenForJpeg(canvas);
           blob = await encodeCanvas(canvas, mime, q / 100);
         }
-        return { blob, sizeBytes: blob.size, quality: outQuality, width, height, scaledDown, mime };
+        return { blob, sizeBytes: blob.size, quality: outQuality, width, height, scaledDown, mime, customDimensions };
       } finally {
         // Release the decoded bitmap immediately — bounds memory in large batches.
         revokeLoadedImage(image);
@@ -142,8 +170,16 @@ export default function Compressor({
   );
 
   const runBatch = useCallback(
-    async (m: "quality" | "target", q: number, kb: number, mime: OutputMime) => {
+    async (m: "quality" | "target", q: number, kb: number, mime: OutputMime, resize?: ResizeSettings) => {
       if (workingRef.current) return;
+      if (resize) {
+        try {
+          resizeDimensions(1, 1, resize);
+        } catch (err) {
+          setNotice(errorMessage(err));
+          return;
+        }
+      }
       const queued = itemsRef.current.filter((i) => i.status === "queued");
       if (queued.length === 0) return;
       setLastRunSig(null);
@@ -158,7 +194,7 @@ export default function Compressor({
           if (!next) break;
           updateItem(next.id, { status: "working", error: null });
           try {
-            const r = await compressOne(next.file, m, q, kb, mime);
+            const r = await compressOne(next.file, m, q, kb, mime, resize);
             const prev = itemsRef.current.find((i) => i.id === next.id)?.result;
             if (prev) URL.revokeObjectURL(prev.url);
             const url = URL.createObjectURL(r.blob);
@@ -175,7 +211,7 @@ export default function Compressor({
       } finally {
         workingRef.current = false;
         setWorking(false);
-        setLastRunSig(JSON.stringify([m, q, kb, mime]));
+        setLastRunSig(JSON.stringify([m, q, kb, mime, resize]));
         trackEvent("compress_batch_completed", { succeeded, mode: m });
       }
     },
@@ -237,20 +273,24 @@ export default function Compressor({
       const next = [...itemsRef.current, ...fresh];
       syncItems(next);
       if (activeId === null && fresh.length > 0) setActiveId(fresh[0].id);
-      void runBatch(mode, quality, targetKB, format);
+      void runBatch(mode, quality, targetKB, format, resizeSettings);
     },
-    [activeId, format, mode, quality, runBatch, syncItems, targetKB],
+    [activeId, format, mode, quality, resizeSettings, runBatch, syncItems, targetKB],
   );
 
   const recompressAll = useCallback(() => {
+    if (resizeError) {
+      setNotice(resizeError);
+      return;
+    }
     const next = itemsRef.current.map((item) => {
       if (item.previewUrl === null) return item;
       if (item.result) URL.revokeObjectURL(item.result.url);
       return { ...item, result: null, error: null, status: "queued" as const };
     });
     syncItems(next);
-    void runBatch(mode, quality, targetKB, format);
-  }, [format, mode, quality, runBatch, syncItems, targetKB]);
+    void runBatch(mode, quality, targetKB, format, resizeSettings);
+  }, [format, mode, quality, resizeError, resizeSettings, runBatch, syncItems, targetKB]);
 
   const removeItem = useCallback(
     (id: number) => {
@@ -282,10 +322,10 @@ export default function Compressor({
     try {
       await downloadZip(
         done.map((i) => ({
-          name: withExtension(`compressed-${i.file.name}`, (i.result as CompressResult).mime),
+          name: withExtension(`${outputPrefix}-${i.file.name}`, (i.result as CompressResult).mime),
           blob: (i.result as CompressResult).blob,
         })),
-        "pixelshrink-compressed",
+        `pixelshrink-${outputPrefix}`,
       );
       trackEvent("compress_zip_downloaded", { count: done.length });
     } catch {
@@ -293,12 +333,13 @@ export default function Compressor({
     } finally {
       setZipBusy(false);
     }
-  }, [zipBusy]);
+  }, [outputPrefix, zipBusy]);
 
   const doneCount = items.filter((i) => i.status === "done").length;
+  const processableCount = items.filter((i) => i.previewUrl !== null).length;
   const queuedCount = items.filter((i) => i.status === "queued" || i.status === "working").length;
   const active = items.find((i) => i.id === activeId) ?? items[0] ?? null;
-  const currentSig = JSON.stringify([mode, quality, targetKB, format]);
+  const currentSig = JSON.stringify([mode, quality, targetKB, format, resizeSettings]);
   const stale = doneCount > 0 && !working && lastRunSig !== null && lastRunSig !== currentSig;
 
   return (
@@ -420,7 +461,7 @@ export default function Compressor({
                     type="button"
                     onClick={() => {
                       if (!item.result) return;
-                      downloadBlob(item.result.blob, withExtension(`compressed-${item.file.name}`, item.result.mime));
+                      downloadBlob(item.result.blob, withExtension(`${outputPrefix}-${item.file.name}`, item.result.mime));
                       trackEvent("compress_downloaded", { files: 1 });
                     }}
                     className="shrink-0 rounded-lg bg-emerald-600 px-3 py-2 text-xs font-semibold text-white hover:bg-emerald-700 focus-visible:outline-2"
@@ -445,6 +486,38 @@ export default function Compressor({
 
       <div className="mt-5 grid gap-5 md:grid-cols-2">
         <div className="space-y-4">
+          {enableResize && (
+            <fieldset className="rounded-xl border border-slate-200 p-4 dark:border-slate-700" disabled={working}>
+              <legend className="px-1 text-sm font-semibold text-slate-900 dark:text-slate-100">Image dimensions</legend>
+              <div className="grid grid-cols-2 gap-3">
+                <div>
+                  <label htmlFor="cmp-width" className="text-sm font-medium text-slate-900 dark:text-slate-100">Width (px)</label>
+                  <input id="cmp-width" type="number" min={1} max={8000} step={1} placeholder="Original" value={resizeWidth}
+                    onChange={(e) => setResizeWidth(e.target.value)} aria-describedby="cmp-dimensions-help"
+                    aria-invalid={Boolean(resizeError)}
+                    className="mt-1 w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm dark:border-slate-600 dark:bg-slate-900" />
+                </div>
+                <div>
+                  <label htmlFor="cmp-height" className="text-sm font-medium text-slate-900 dark:text-slate-100">Height (px)</label>
+                  <input id="cmp-height" type="number" min={1} max={8000} step={1} placeholder="Original" value={resizeHeight}
+                    onChange={(e) => setResizeHeight(e.target.value)} aria-describedby="cmp-dimensions-help"
+                    aria-invalid={Boolean(resizeError)}
+                    className="mt-1 w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm dark:border-slate-600 dark:bg-slate-900" />
+                </div>
+              </div>
+              <label className="mt-3 flex items-center gap-2 text-sm text-slate-700 dark:text-slate-300">
+                <input type="checkbox" checked={keepAspectRatio} onChange={(e) => setKeepAspectRatio(e.target.checked)} className="accent-blue-600" />
+                Keep aspect ratio
+              </label>
+              <p id="cmp-dimensions-help" className="mt-2 text-xs text-slate-500 dark:text-slate-400">
+                Leave both blank to keep the original size. With aspect ratio locked, each image fits within
+                the dimensions you enter. Unlock it to set width and height independently; this can stretch the image.
+              </p>
+              <button type="button" onClick={() => { setResizeWidth(""); setResizeHeight(""); }}
+                className="mt-2 text-xs font-medium text-blue-700 underline dark:text-blue-400">Reset dimensions</button>
+              {resizeError && <p role="alert" className="mt-2 text-sm text-red-700 dark:text-red-300">{resizeError}</p>}
+            </fieldset>
+          )}
           <fieldset>
             <legend className="text-sm font-semibold text-slate-900 dark:text-slate-100">Mode</legend>
             <div className="mt-2 flex gap-2" role="radiogroup" aria-label="Compression mode">
@@ -503,7 +576,9 @@ export default function Compressor({
                 className="mt-2 w-full rounded-lg border border-slate-300 px-3 py-2 text-sm disabled:bg-slate-100 focus-visible:outline-2 dark:border-slate-600 dark:disabled:bg-slate-800"
               />
               <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">
-                Binary search over encoder quality hits your exact byte target, shrinking dimensions only if quality alone can&apos;t get there.
+                {enableResize && (resizeWidth !== "" || resizeHeight !== "")
+                  ? "Tries to meet your KB target while keeping your selected dimensions. If it cannot fit, try a larger target, smaller dimensions, or another format."
+                  : "Tries to meet your KB target by adjusting quality, then reducing dimensions if needed. Check the final size before uploading."}
               </p>
             </div>
           )}
@@ -525,14 +600,14 @@ export default function Compressor({
               ))}
             </select>
             {format === "image/png" && mode === "quality" && (
-              <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">PNG is lossless, so the quality slider has no effect — file size changes only in target-KB mode.</p>
+              <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">PNG is lossless, so the quality slider has no effect. Reduce dimensions or choose JPG/WebP for a smaller file.</p>
             )}
           </div>
 
           <button
             type="button"
             onClick={recompressAll}
-            disabled={items.length === 0 || working}
+            disabled={processableCount === 0 || working || Boolean(resizeError)}
             aria-busy={working}
             className="w-full rounded-lg bg-blue-600 px-4 py-2.5 text-sm font-semibold text-white hover:bg-blue-700 disabled:cursor-not-allowed disabled:bg-slate-300 focus-visible:outline-2"
           >
@@ -540,14 +615,13 @@ export default function Compressor({
               ? `Compressing… ${doneCount}/${items.length}`
               : items.length === 0
                 ? "Choose images to start"
-                : doneCount === items.length && doneCount > 0
-                  ? "Re-compress all"
-                  : `Compress ${queuedCount > 0 ? queuedCount : items.length} image${items.length === 1 ? "" : "s"}`}
+                : doneCount === processableCount && doneCount > 0
+                  ? (enableResize ? "Resize and compress all" : "Re-compress all")
+                  : `${enableResize ? "Resize and compress" : "Compress"} ${queuedCount > 0 ? queuedCount : processableCount} image${(queuedCount > 0 ? queuedCount : processableCount) === 1 ? "" : "s"}`}
           </button>
           {stale ? (
             <p role="status" className="mt-3 rounded-lg border border-amber-200 bg-amber-50 px-4 py-2.5 text-sm text-amber-900 dark:border-amber-800 dark:bg-amber-950 dark:text-amber-200">
-              Settings changed — these sizes are from the previous settings. Press “Re-compress
-              all” to update them.
+              Settings changed — these sizes are from the previous settings. Press “{enableResize ? "Resize and compress all" : "Re-compress all"}” to update them.
             </p>
           ) : null}
           {doneCount >= 2 && (
@@ -613,8 +687,8 @@ export default function Compressor({
                 {item.result && mode === "target" && (
                   <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">
                     Final quality {Math.round(item.result.quality * 100)}%
-                    {item.result.scaledDown ? " · dimensions reduced to hit the target" : " · full dimensions kept"} ·{" "}
-                    {item.result.sizeBytes <= targetKB * 1024 ? "target met ✓" : "target missed — try a larger KB value or WebP"}
+                    {item.result.scaledDown ? " · dimensions reduced to hit the target" : item.result.customDimensions ? " · selected dimensions kept" : " · full dimensions kept"} ·{" "}
+                    {item.result.sizeBytes <= targetKB * 1024 ? "target met ✓" : "target missed — try a larger KB value, smaller dimensions, or WebP"}
                   </p>
                 )}
                 {item.result && mode === "quality" && (
@@ -627,12 +701,12 @@ export default function Compressor({
                     type="button"
                     onClick={() => {
                       if (!item.result) return;
-                      downloadBlob(item.result.blob, withExtension(`compressed-${item.file.name}`, item.result.mime));
+                      downloadBlob(item.result.blob, withExtension(`${outputPrefix}-${item.file.name}`, item.result.mime));
                       trackEvent("compress_downloaded", { files: 1 });
                     }}
                     className="mt-2 w-full rounded-lg bg-emerald-600 px-4 py-2.5 text-sm font-semibold text-white hover:bg-emerald-700 focus-visible:outline-2"
                   >
-                    Download compressed image
+                    {enableResize ? "Download resized and compressed image" : "Download compressed image"}
                   </button>
                 )}
               </div>

@@ -18,7 +18,7 @@ export default function SiteHeader() {
         </Link>
 
         {/* Desktop nav */}
-        <nav aria-label="Primary" className="hidden items-center gap-1 sm:flex">
+        <nav aria-label="Primary" className="hidden items-center gap-1 lg:flex">
           <ul className="flex items-center gap-2">
             {HEADER_NAV.map((item) => (
               <li key={item.href}>
@@ -35,7 +35,7 @@ export default function SiteHeader() {
         </nav>
 
         {/* Mobile controls: theme toggle + hamburger button */}
-        <div className="flex items-center gap-1 sm:hidden">
+        <div className="flex items-center gap-1 lg:hidden">
           <ThemeToggle />
           <button
             type="button"
@@ -63,7 +63,7 @@ export default function SiteHeader() {
 
       {/* Mobile dropdown panel */}
       {open && (
-        <nav aria-label="Mobile" id="mobile-nav" className="border-t border-slate-200 bg-white sm:hidden dark:border-slate-700 dark:bg-slate-950">
+        <nav aria-label="Mobile" id="mobile-nav" className="border-t border-slate-200 bg-white lg:hidden dark:border-slate-700 dark:bg-slate-950">
           <ul className="mx-auto w-full max-w-6xl px-4 py-2 sm:px-6">
             {HEADER_NAV.map((item) => (
               <li key={item.href}>

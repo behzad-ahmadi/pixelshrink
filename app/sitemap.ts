@@ -12,38 +12,52 @@ const LEGAL_PATHS: Array<{ path: string; priority: number }> = [
   { path: "/terms", priority: 0.3 },
 ];
 
+const UPDATED_PATHS = new Set([
+  "/",
+  "/compress-image",
+  "/image-compressor",
+  "/resize-image",
+  "/crop-image",
+  "/compress-image-to-50kb",
+  "/compress-image-to-20kb",
+  "/compress-image-to-100kb",
+  "/guides/reduce-image-size-without-losing-quality",
+]);
+
 export default function sitemap(): MetadataRoute.Sitemap {
   // Static date: new Date() is not allowed during prerendering
   // with Cache Components enabled.
-  const now = new Date("2026-10-08T00:00:00Z");
+  const previousUpdate = new Date("2026-10-08T00:00:00Z");
+  const contentUpdate = new Date("2026-10-27T00:00:00Z");
+  const lastModified = (path: string) => UPDATED_PATHS.has(path) ? contentUpdate : previousUpdate;
   return [
     {
       url: SITE_URL,
-      lastModified: now,
+      lastModified: lastModified("/"),
       changeFrequency: "weekly",
       priority: 1,
     },
     ...TOOLS.map((tool) => ({
       url: `${SITE_URL}${tool.href}`,
-      lastModified: now,
+      lastModified: lastModified(tool.href),
       changeFrequency: "weekly" as const,
       priority: 0.9,
     })),
     ...CONVERT_PAIRS.map((pair) => ({
       url: `${SITE_URL}${pair.href}`,
-      lastModified: now,
+      lastModified: lastModified(pair.href),
       changeFrequency: "weekly" as const,
       priority: 0.8,
     })),
     ...GUIDE_PATHS.map((path) => ({
       url: `${SITE_URL}${path}`,
-      lastModified: now,
+      lastModified: lastModified(path),
       changeFrequency: "monthly" as const,
       priority: 0.7,
     })),
     ...LEGAL_PATHS.map((entry) => ({
       url: `${SITE_URL}${entry.path}`,
-      lastModified: now,
+      lastModified: lastModified(entry.path),
       changeFrequency: "yearly" as const,
       priority: entry.priority,
     })),

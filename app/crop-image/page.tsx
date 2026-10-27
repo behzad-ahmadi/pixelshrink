@@ -95,7 +95,7 @@ export default function CropImagePage() {
               where horizontal sweep carries the message. And Free mode covers everything bespoke: marketplace
               image slots with odd ratios, banner crops, or artistic compositions that no standard fits. When
               a destination names dimensions (1080 × 1350, say), crop to the ratio first and <Link href="/resize-image">resize to the
-              pixels</Link> after — ratio from the cropper, pixels from the resizer, bytes from the <Link href="/compress-image">compressor</Link>.
+              pixels</Link> after. For the final file-size adjustment, use <Link href="/compress-image">resize and compress image online free</Link>.
             </p>
             <h2>How to crop an image in four steps</h2>
             <ol>
@@ -159,6 +159,12 @@ export default function CropImagePage() {
               new ratio (square avatar today, widescreen banner tomorrow) compounds pixel losses — return to
               the master each time, frame fresh for each destination, and every derivative starts life at
               maximum quality.
+            </p>
+            <p>
+              Once the framing is right, use <Link href="/compress-image">resize and compress image online free</Link>{" "}
+              to choose pixel dimensions and a quality setting or KB target in one step. The combined
+              tool includes width, height, and aspect-ratio controls. Check both final dimensions and
+              file size before uploading to a destination with strict requirements.
             </p>
           </>
         }
