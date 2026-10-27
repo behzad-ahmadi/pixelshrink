@@ -103,7 +103,7 @@ export interface NavItem {
 }
 
 export const HEADER_NAV: NavItem[] = [
-  { href: '/compress-image', label: 'resize and compress image online free' },
+  { href: '/compress-image', label: 'Resize and compress' },
   { href: '/image-compressor', label: 'Compress' },
   { href: '/resize-image', label: 'Resize' },
   { href: '/convert-image', label: 'Convert' },
