@@ -1,7 +1,10 @@
 import type { MetadataRoute } from "next";
+import { GUIDES } from "@/lib/guides";
 import { SITE_URL, TOOLS, CONVERT_PAIRS } from "@/lib/site";
 
 const GUIDE_PATHS: string[] = [
+  "/guides",
+  ...GUIDES.map((guide) => `/guides/${guide.slug}`),
   "/guides/reduce-image-size-without-losing-quality",
 ];
 

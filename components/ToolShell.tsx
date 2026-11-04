@@ -1,4 +1,6 @@
 import type { ReactNode } from "react";
+import Link from "next/link";
+import { GUIDES } from "@/lib/guides";
 import RelatedTools from "@/components/RelatedTools";
 
 export interface ToolShellProps {
@@ -52,6 +54,7 @@ export default function ToolShell({
       {faq && <div className="mt-12">{faq}</div>}
 
       <RelatedTools excludeHref={relatedExclude} />
+      <aside className="guide mt-10"><h2>Related reading</h2><ul>{GUIDES.filter((guide) => guide.tool === relatedExclude).map((guide) => <li key={guide.slug}><Link href={`/guides/${guide.slug}`}>{guide.title}</Link></li>)}<li><Link href="/guides">All image editing guides</Link></li></ul></aside>
     </div>
   );
 }

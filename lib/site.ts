@@ -108,7 +108,7 @@ export const HEADER_NAV: NavItem[] = [
   { href: '/resize-image', label: 'Resize' },
   { href: '/convert-image', label: 'Convert' },
   { href: '/crop-image', label: 'Crop' },
-  { href: '/guides/reduce-image-size-without-losing-quality', label: 'Guides' },
+  { href: '/guides', label: 'Guides' },
 ]
 
 export function canonical(path: string): string {
