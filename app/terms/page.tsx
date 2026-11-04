@@ -1,3 +1,4 @@
+import ArticleAccordion from "@/components/ArticleAccordion";
 import { buildMetadata, BRAND, CONTACT_EMAIL } from "@/lib/site";
 
 export const metadata = buildMetadata({
@@ -35,7 +36,7 @@ export default function TermsPage() {
         imagery intended to defraud, to process unlawful content, or to attempt
         to disrupt the site through abusive automated traffic, scraping at
         unreasonable rates, or probing for vulnerabilities. Because processing
-        is local, misuse of the tools themselves is your sole responsibility —
+        is local, misuse of the tools themselves is your sole responsibility أ¢â‚¬â€‌
         we have no technical ability to monitor what you do with files on your
         own machine, and we accept no liability for it.
       </p>
@@ -49,7 +50,7 @@ export default function TermsPage() {
         to link to our tools and share your results. You may not copy
         substantial portions of the site&apos;s original written content,
         present the tools as your own, or circumvent any technical measures
-        that protect the service. Your own images remain entirely yours — we
+        that protect the service. Your own images remain entirely yours أ¢â‚¬â€‌ we
         claim no rights over files you process, and since files never reach our
         servers, we never even possess them.
       </p>
@@ -86,8 +87,8 @@ export default function TermsPage() {
       <p className="mt-3 leading-7 text-slate-600 dark:text-slate-300">
         To the maximum extent permitted by law, {BRAND} and its operators are
         not liable for any indirect, incidental, consequential, special, or
-        exemplary damages — including lost files, lost profits, or missed
-        deadlines — arising from your use of or inability to use the service,
+        exemplary damages أ¢â‚¬â€‌ including lost files, lost profits, or missed
+        deadlines أ¢â‚¬â€‌ arising from your use of or inability to use the service,
         even if advised of the possibility of such damages. Our total liability
         for any claim related to the service is limited to the amount you paid
         to use it, which is zero.
@@ -117,6 +118,8 @@ export default function TermsPage() {
         </a>
         .
       </p>
-    </div>
+
+<section className="mt-10" aria-label="Practical reading"><ArticleAccordion title="Check the destination requirements before relying on an export"><p>{"A successful export means you have a new image file. It does not certify that the picture meets an application portal\u2019s rules, an identity-photo standard or a print provider\u2019s requirements. Review those requirements directly and inspect the saved file."}</p><p>{"Keep your original until the receiving service accepts the result. If an image belongs to someone else, make sure you have permission to edit and share it. The terms above remain the reference for using this service."}</p></ArticleAccordion></section>
+</div>
   );
 }

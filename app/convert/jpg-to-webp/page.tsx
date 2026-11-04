@@ -1,12 +1,13 @@
+import PageArticles from "@/components/PageArticles";
 import type { Metadata } from "next";
 import Converter from "@/components/Converter";
 import { Breadcrumbs, Faq, RelatedLinks } from "@/components/page-bits";
 import { CONVERT_PAIRS, TOOLS, buildMetadata, canonical } from "@/lib/site";
 
 export const metadata: Metadata = buildMetadata({
-  title: "JPG to WebP Converter — Modernize Photos Free",
+  title: "JPG to WebP Converter â€” Modernize Photos Free",
   description:
-    "Convert JPG to WebP free in your browser. Cut photo size 25–35% for faster sites. Private canvas encoding, no uploads.",
+    "Convert JPG to WebP free in your browser. Cut photo size 25â€“35% for faster sites. Private canvas encoding, no uploads.",
   path: "/convert/jpg-to-webp",
 });
 
@@ -14,7 +15,7 @@ const FAQS = [
   {
     question: "Why convert JPG to WebP?",
     answer:
-      "WebP uses a more modern encoder than JPEG, so the same photo is typically 25–35% smaller at equal visual quality. Smaller images mean faster pages, lower bandwidth bills, and better Core Web Vitals scores.",
+      "WebP uses a more modern encoder than JPEG, so the same photo is typically 25â€“35% smaller at equal visual quality. Smaller images mean faster pages, lower bandwidth bills, and better Core Web Vitals scores.",
   },
   {
     question: "Do all browsers support WebP?",
@@ -24,7 +25,7 @@ const FAQS = [
   {
     question: "What quality should I use?",
     answer:
-      "WebP at 80–85% matches an 85–90% JPEG visually while staying smaller. Start at 85% for hero images and product photos, 75–80% for thumbnails and decorative images.",
+      "WebP at 80â€“85% matches an 85â€“90% JPEG visually while staying smaller. Start at 85% for hero images and product photos, 75â€“80% for thumbnails and decorative images.",
   },
   {
     question: "Is my photo uploaded to a server?",
@@ -34,25 +35,25 @@ const FAQS = [
   {
     question: "Can I convert in bulk or keep the original filename?",
     answer:
-      "Drop up to 10 files into the tool above — they are converted one after another on your device, and each download keeps its original filename with only the extension changed (photo.jpg becomes photo.webp). With 2 or more done, a Download-all-as-ZIP button appears. Everything runs locally with no upload queue, so a batch takes seconds.",
+      "Drop up to 10 files into the tool above â€” they are converted one after another on your device, and each download keeps its original filename with only the extension changed (photo.jpg becomes photo.webp). With 2 or more done, a Download-all-as-ZIP button appears. Everything runs locally with no upload queue, so a batch takes seconds.",
   },
   {
     question: "Should I replace all my site images with WebP?",
     answer:
-      "For photos, hero images, and thumbnails — yes. WebP at 80–85% looks identical to JPG at 85–90% while weighing a third less, which directly improves Largest Contentful Paint. Keep PNG only for images that need lossless edges or transparency with legacy support, and keep a JPG fallback only if you serve visitors on browsers older than 2020.",
+      "For photos, hero images, and thumbnails â€” yes. WebP at 80â€“85% looks identical to JPG at 85â€“90% while weighing a third less, which directly improves Largest Contentful Paint. Keep PNG only for images that need lossless edges or transparency with legacy support, and keep a JPG fallback only if you serve visitors on browsers older than 2020.",
   },
 ];
 
 const JSON_LD = {
   "@context": "https://schema.org",
   "@type": "WebApplication",
-  name: "JPG to WebP Converter — PixelShrink",
+  name: "JPG to WebP Converter â€” PixelShrink",
   url: canonical("/convert/jpg-to-webp"),
   applicationCategory: "MultimediaApplication",
   operatingSystem: "Any",
   offers: { "@type": "Offer", price: "0" },
   description:
-    "Free in-browser JPG to WebP converter. Cut photo size 25–35% for faster sites with private canvas encoding.",
+    "Free in-browser JPG to WebP converter. Cut photo size 25â€“35% for faster sites with private canvas encoding.",
 };
 
 export default function JpgToWebpPage() {
@@ -72,7 +73,7 @@ export default function JpgToWebpPage() {
         <p className="mt-3 max-w-2xl text-base leading-relaxed text-slate-600 dark:text-slate-300">
           Modernize JPEG photos into lighter WebP files for the web. Upload a
           .jpg, choose quality, and download a .webp that looks identical at
-          roughly two-thirds the size — encoded privately on your device.
+          roughly two-thirds the size â€” encoded privately on your device.
         </p>
       </header>
 
@@ -97,8 +98,8 @@ export default function JpgToWebpPage() {
         <div className="mt-4 grid gap-4 sm:grid-cols-2">
           {[
             {
-              title: "25–35% smaller files",
-              text: "Google's WebP encoder squeezes the same pixels into fewer bytes than JPEG at matched quality — free bandwidth savings on every pageview.",
+              title: "25â€“35% smaller files",
+              text: "Google's WebP encoder squeezes the same pixels into fewer bytes than JPEG at matched quality â€” free bandwidth savings on every pageview.",
             },
             {
               title: "Faster page loads",
@@ -110,7 +111,7 @@ export default function JpgToWebpPage() {
             },
             {
               title: "Universal browser support",
-              text: "All modern browsers render WebP natively — no plugins, no fallbacks needed for the vast majority of audiences.",
+              text: "All modern browsers render WebP natively â€” no plugins, no fallbacks needed for the vast majority of audiences.",
             },
           ].map((c) => (
             <div
@@ -157,16 +158,17 @@ export default function JpgToWebpPage() {
         <p className="mt-3 text-sm leading-relaxed text-slate-600 dark:text-slate-300">
           WebP quality maps roughly 5 points below JPG: WebP at 80% looks like
           JPG at 85%, and WebP at 85% matches JPG at 90%. A 2MB JPG photo
-          typically becomes a 1.2–1.4MB WebP at 85% with no visible change, and
+          typically becomes a 1.2â€“1.4MB WebP at 85% with no visible change, and
           dropping to 80% pushes it near 1MB for thumbnails and decorative
-          images. Start at 85% for anything prominent — hero images, product
-          photos, portfolio work — and reserve 75–80% for avatars and
+          images. Start at 85% for anything prominent â€” hero images, product
+          photos, portfolio work â€” and reserve 75â€“80% for avatars and
           below-the-fold decoration. Because conversion re-encodes pixels,
           always convert from the highest-quality original you have, not from
           an already recompressed copy.
         </p>
       </section>
 
+      <PageArticles path="/convert/jpg-to-webp" />
       <Faq items={FAQS} />
       <RelatedLinks
         links={[

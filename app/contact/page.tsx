@@ -1,10 +1,11 @@
+import ArticleAccordion from "@/components/ArticleAccordion";
 import { buildMetadata, BRAND, CONTACT_EMAIL } from "@/lib/site";
 import ContactForm from "./contact-form";
 
 export const metadata = buildMetadata({
   title: "Contact",
   description:
-    "Contact PixelShrink: report a bug, request a feature, or ask a privacy question. The form opens your email app — no account needed.",
+    "Contact PixelShrink: report a bug, request a feature, or ask a privacy question. The form opens your email app أ¢â‚¬â€‌ no account needed.",
   path: "/contact",
 });
 
@@ -30,8 +31,8 @@ export default function ContactPage() {
         browser and operating system, the type and approximate size of the
         image, and the exact steps that led to the problem. Screenshots of any
         error are always welcome. For feature requests, describe the job you
-        are trying to get done — for example, the upload limit you keep hitting
-        or the format your editor refuses to open — rather than just naming a
+        are trying to get done أ¢â‚¬â€‌ for example, the upload limit you keep hitting
+        or the format your editor refuses to open أ¢â‚¬â€‌ rather than just naming a
         button you want. The underlying need often points to a better solution
         than the one first imagined.
       </p>
@@ -40,7 +41,7 @@ export default function ContactPage() {
         documents unless they are essential to the issue, and never send
         passwords. If your question is about advertising or data handling, our
         privacy policy already answers most common questions and is worth a
-        look first. For anything else, the form below is the fastest route —
+        look first. For anything else, the form below is the fastest route أ¢â‚¬â€‌
         or email us directly at{" "}
         <a
           className="font-medium text-slate-900 underline dark:text-slate-100"
@@ -51,6 +52,8 @@ export default function ContactPage() {
         .
       </p>
       <ContactForm />
-    </div>
+
+<section className="mt-10" aria-label="Practical reading"><ArticleAccordion title="How to describe an image problem without sharing the image"><p>{"A useful support message starts with the tool you used, your browser and the exact error text. Include the source format, approximate file size and intended output dimensions. These details can explain a failed conversion without exposing the contents of a personal photo."}</p><p>{"If an upload portal rejected the result, copy its stated requirements as well. A format mismatch, a pixel-size rule and a byte limit require different fixes. Please leave out passwords, identity numbers and other details that are unrelated to the problem."}</p></ArticleAccordion></section>
+</div>
   );
 }

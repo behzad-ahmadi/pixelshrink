@@ -1,12 +1,13 @@
+import PageArticles from "@/components/PageArticles";
 import type { Metadata } from "next";
 import Converter from "@/components/Converter";
 import { Breadcrumbs, Faq, RelatedLinks } from "@/components/page-bits";
 import { CONVERT_PAIRS, TOOLS, buildMetadata, canonical } from "@/lib/site";
 
 export const metadata: Metadata = buildMetadata({
-  title: "WebP to JPG Converter — Free, Private, No Upload",
+  title: "WebP to JPG Converter â€” Free, Private, No Upload",
   description:
-    "Convert WebP to JPG free in your browser. No uploads, no signup — flatten transparency & download universal JPEGs.",
+    "Convert WebP to JPG free in your browser. No uploads, no signup â€” flatten transparency & download universal JPEGs.",
   path: "/convert/webp-to-jpg",
 });
 
@@ -19,7 +20,7 @@ const FAQS = [
   {
     question: "Will I lose quality converting WebP to JPG?",
     answer:
-      "Both formats are lossy, so re-encoding can soften fine detail slightly. At 90% quality or above the difference is invisible for normal viewing — keep the original WebP if you plan to edit further.",
+      "Both formats are lossy, so re-encoding can soften fine detail slightly. At 90% quality or above the difference is invisible for normal viewing â€” keep the original WebP if you plan to edit further.",
   },
   {
     question: "What happens to transparency in my WebP?",
@@ -34,19 +35,19 @@ const FAQS = [
   {
     question: "What quality setting should I use?",
     answer:
-      "Keep quality at 90% for everyday sharing — the output is visually identical to the WebP original in almost every case. Raise to 92–95% for images you plan to print or edit further, since every lossy generation discards a little detail. Going below 85% visibly softens textures and text edges, so only do it when file size matters more than fidelity.",
+      "Keep quality at 90% for everyday sharing â€” the output is visually identical to the WebP original in almost every case. Raise to 92â€“95% for images you plan to print or edit further, since every lossy generation discards a little detail. Going below 85% visibly softens textures and text edges, so only do it when file size matters more than fidelity.",
   },
   {
     question: "Can I convert multiple WebP files at once?",
     answer:
-      "Yes — drop up to 10 WebP files into the tool above. They are converted one after another on your device, and each download keeps its original filename with only the extension changed (image.webp becomes image.jpg). With 2 or more done, a Download-all-as-ZIP button appears — no upload queue, no waiting on a server.",
+      "Yes â€” drop up to 10 WebP files into the tool above. They are converted one after another on your device, and each download keeps its original filename with only the extension changed (image.webp becomes image.jpg). With 2 or more done, a Download-all-as-ZIP button appears â€” no upload queue, no waiting on a server.",
   },
 ];
 
 const JSON_LD = {
   "@context": "https://schema.org",
   "@type": "WebApplication",
-  name: "WebP to JPG Converter — PixelShrink",
+  name: "WebP to JPG Converter â€” PixelShrink",
   url: canonical("/convert/webp-to-jpg"),
   applicationCategory: "MultimediaApplication",
   operatingSystem: "Any",
@@ -72,7 +73,7 @@ export default function WebpToJpgPage() {
         <p className="mt-3 max-w-2xl text-base leading-relaxed text-slate-600 dark:text-slate-300">
           Turn WebP downloads into universally compatible JPEG files. Upload
           your .webp, pick a quality level, and download a .jpg that works in
-          every app, inbox, and upload form — processed entirely on your device.
+          every app, inbox, and upload form â€” processed entirely on your device.
         </p>
       </header>
 
@@ -106,11 +107,11 @@ export default function WebpToJpgPage() {
             },
             {
               title: "Printing photos",
-              text: "Print shops and kiosks expect JPG or PNG. A 90–95% quality JPG keeps prints sharp while staying compact.",
+              text: "Print shops and kiosks expect JPG or PNG. A 90â€“95% quality JPG keeps prints sharp while staying compact.",
             },
             {
               title: "Sharing with anyone",
-              text: "JPG opens on every phone, tablet, and desktop made in the last twenty years — no 'file not supported' surprises.",
+              text: "JPG opens on every phone, tablet, and desktop made in the last twenty years â€” no 'file not supported' surprises.",
             },
           ].map((c) => (
             <div
@@ -157,7 +158,7 @@ export default function WebpToJpgPage() {
         <p className="mt-3 text-sm leading-relaxed text-slate-600 dark:text-slate-300">
           WebP is technically superior, but compatibility decides formats in
           the real world. Exam portals, job applications, and government upload
-          forms frequently whitelist .jpg and reject everything else — hitting
+          forms frequently whitelist .jpg and reject everything else â€” hitting
           that error at submit time is the most common reason people convert.
           Older email clients and office suites embed JPG reliably while
           mishandling WebP attachments, and print shops universally expect JPG
@@ -167,6 +168,7 @@ export default function WebpToJpgPage() {
         </p>
       </section>
 
+      <PageArticles path="/convert/webp-to-jpg" />
       <Faq items={FAQS} />
       <RelatedLinks
         links={[

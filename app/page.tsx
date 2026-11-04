@@ -1,3 +1,4 @@
+import ArticleAccordion from "@/components/ArticleAccordion";
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { Faq } from '@/components/page-bits'
@@ -11,7 +12,7 @@ import {
 } from '@/lib/site'
 
 export const metadata: Metadata = buildMetadata({
-  title: 'Free Image Tools — Compress, Resize, Convert',
+  title: 'Free Image Tools أ¢â‚¬â€‌ Compress, Resize, Convert',
   description:
     'Free image tools that never upload your files. Compress, resize, crop & convert JPG, PNG, WebP in your browser.',
   path: '/',
@@ -21,7 +22,7 @@ const HOME_FAQS = [
   {
     question: 'Are these image tools really free?',
     answer:
-      'Yes — every tool is free with no account and no watermark. You can process up to 10 files per batch and run as many batches as you like. Processing happens in your browser, so there is no server cost per conversion to pass on to you.',
+      'Yes أ¢â‚¬â€‌ every tool is free with no account and no watermark. You can process up to 10 files per batch and run as many batches as you like. Processing happens in your browser, so there is no server cost per conversion to pass on to you.',
   },
   {
     question: 'Do my images get uploaded to a server?',
@@ -36,7 +37,7 @@ const HOME_FAQS = [
   {
     question: 'Will compressing ruin my photo quality?',
     answer:
-      'Not if you stay in the sweet spot: JPEG or WebP at 80–90% quality looks identical to the original at normal viewing distance while cutting 50–70% of the bytes. Start at 85% and compare at full zoom.',
+      'Not if you stay in the sweet spot: JPEG or WebP at 80أ¢â‚¬â€œ90% quality looks identical to the original at normal viewing distance while cutting 50أ¢â‚¬â€œ70% of the bytes. Start at 85% and compare at full zoom.',
   },
   {
     question: 'Which format should I use: JPG, PNG, or WebP?',
@@ -48,7 +49,7 @@ const HOME_FAQS = [
 const HOME_JSON_LD = {
   '@context': 'https://schema.org',
   '@type': 'WebApplication',
-  name: `${BRAND} — Free Image Tools`,
+  name: `${BRAND} أ¢â‚¬â€‌ Free Image Tools`,
   url: canonical('/'),
   applicationCategory: 'MultimediaApplication',
   operatingSystem: 'Any',
@@ -60,7 +61,7 @@ const HOME_JSON_LD = {
 const USE_CASES = [
   {
     title: 'Exam & job applications',
-    text: 'Hit strict 20KB and 50KB upload limits for admit cards, resumes, signatures, and ID proofs — without a rejected submission.',
+    text: 'Hit strict 20KB and 50KB upload limits for admit cards, resumes, signatures, and ID proofs أ¢â‚¬â€‌ without a rejected submission.',
     href: '/compress-image-to-20kb',
     cta: 'Compress to 20KB',
   },
@@ -87,7 +88,7 @@ const USE_CASES = [
 export default function HomePage() {
   return (
     <div className='w-full'>
-      {/* Hero — full-bleed so zoom-out shows background, not blank sides */}
+      {/* Hero أ¢â‚¬â€‌ full-bleed so zoom-out shows background, not blank sides */}
       <section className='w-full border-b border-slate-200 bg-gradient-to-b from-blue-50 via-slate-50 to-white dark:border-slate-700 dark:from-blue-950 dark:via-slate-900 dark:to-slate-900'>
         <div className='mx-auto w-full max-w-6xl px-4 py-10 sm:px-6 sm:py-16'>
           <header className='mx-auto max-w-3xl text-center'>
@@ -96,7 +97,7 @@ export default function HomePage() {
             </h1>
             <p className='mx-auto mt-4 max-w-2xl text-base leading-relaxed text-slate-600 sm:text-lg dark:text-slate-300'>
               {TAGLINE} Compress, resize, crop, and convert JPG, PNG, and WebP
-              right in your browser — no account, no watermark, no waiting.
+              right in your browser أ¢â‚¬â€‌ no account, no watermark, no waiting.
             </p>
             <div className='mt-6 flex flex-wrap justify-center gap-3'>
               <Link
@@ -113,13 +114,13 @@ export default function HomePage() {
               </Link>
             </div>
             <p className='mt-4 text-xs text-slate-500 dark:text-slate-400'>
-              Private by design · No signup · Free forever
+              Private by design ط¢آ· No signup ط¢آ· Free forever
             </p>
           </header>
         </div>
       </section>
 
-      {/* Tool cards — full-bleed white */}
+      {/* Tool cards أ¢â‚¬â€‌ full-bleed white */}
       <section
         aria-labelledby='tools-heading'
         className='w-full bg-white dark:bg-slate-900'
@@ -145,7 +146,7 @@ export default function HomePage() {
                   {tool.description}
                 </p>
                 <p className='mt-3 text-sm font-medium text-blue-700 dark:text-blue-400'>
-                  Open tool →
+                  Open tool أ¢â€ â€™
                 </p>
               </Link>
             ))}
@@ -162,7 +163,7 @@ export default function HomePage() {
                   {pair.description}
                 </p>
                 <p className='mt-3 text-sm font-medium text-blue-700 dark:text-blue-400'>
-                  Open tool →
+                  Open tool أ¢â€ â€™
                 </p>
               </Link>
             ))}
@@ -170,7 +171,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Use cases — full-bleed tinted band */}
+      {/* Use cases أ¢â‚¬â€‌ full-bleed tinted band */}
       <section
         aria-labelledby='usecases-heading'
         className='w-full border-y border-slate-200 bg-slate-50 dark:bg-slate-900 dark:border-slate-700'
@@ -198,7 +199,7 @@ export default function HomePage() {
                   href={c.href}
                   className='mt-3 inline-block text-sm font-medium text-blue-700 hover:underline dark:text-blue-400'
                 >
-                  {c.cta} →
+                  {c.cta} أ¢â€ â€™
                 </Link>
               </div>
             ))}
@@ -206,7 +207,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Trust / privacy + FAQ — full-bleed white */}
+      {/* Trust / privacy + FAQ أ¢â‚¬â€‌ full-bleed white */}
       <section className='w-full bg-white dark:bg-slate-900'>
         <div className='mx-auto w-full max-w-6xl px-4 py-12 sm:px-6'>
           <div
@@ -246,7 +247,7 @@ export default function HomePage() {
                 </p>
                 <p className='mt-1'>
                   No signup and no cookies for tool use. Optional analytics only
-                  loads if explicitly configured — otherwise nothing phones
+                  loads if explicitly configured أ¢â‚¬â€‌ otherwise nothing phones
                   home.
                 </p>
               </div>
@@ -270,6 +271,8 @@ export default function HomePage() {
         type='application/ld+json'
         dangerouslySetInnerHTML={{ __html: JSON.stringify(HOME_JSON_LD) }}
       />
-    </div>
+
+<section className="mt-10" aria-label="Practical reading"><ArticleAccordion title="Where should you start with an image that will not upload?"><p>{"An error that says \u201cfile too large\u201d usually points to bytes, while a request for width and height points to pixels. Check both before editing. If the shape is wrong, crop first; if the dimensions are too large, resize; if the file still exceeds the limit, compress the finished image."}</p><p>{"For a file that will not open or a format the destination rejects, start with conversion. Keep the original and check the downloaded copy before you submit it. You do not need to use every tool for every picture."}</p></ArticleAccordion></section>
+</div>
   )
 }

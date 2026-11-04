@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 import Link from "next/link";
-import { GUIDES } from "@/lib/guides";
+import PageArticles from "@/components/PageArticles";
+import ArticleAccordion from "@/components/ArticleAccordion";
 import RelatedTools from "@/components/RelatedTools";
 
 export interface ToolShellProps {
@@ -46,15 +47,14 @@ export default function ToolShell({
       </section>
 
       {guide && (
-        <section aria-label="Guide" className="guide mt-12">
-          {guide}
-        </section>
+        <div className="mt-8"><ArticleAccordion title="How to use this tool">{guide}</ArticleAccordion></div>
       )}
 
       {faq && <div className="mt-12">{faq}</div>}
 
       <RelatedTools excludeHref={relatedExclude} />
-      <aside className="guide mt-10"><h2>Related reading</h2><ul>{GUIDES.filter((guide) => guide.tool === relatedExclude).map((guide) => <li key={guide.slug}><Link href={`/guides/${guide.slug}`}>{guide.title}</Link></li>)}<li><Link href="/guides">All image editing guides</Link></li></ul></aside>
+      <PageArticles path={relatedExclude ?? ""} />
+      <p className="mt-4 text-sm"><Link href="/guides">Browse all image guides</Link></p>
     </div>
   );
 }

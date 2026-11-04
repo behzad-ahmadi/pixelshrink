@@ -1,3 +1,4 @@
+import ArticleAccordion from "@/components/ArticleAccordion";
 import { buildMetadata, BRAND, CONTACT_EMAIL } from "@/lib/site";
 
 export const metadata = buildMetadata({
@@ -12,8 +13,8 @@ export default function PrivacyPage() {
     <div className="mx-auto w-full max-w-3xl px-6 py-12">
       <h1 className="text-3xl font-bold tracking-tight">Privacy Policy</h1>
       <p className="mt-4 leading-7 text-slate-600 dark:text-slate-300">
-        Last updated: October 2026. This policy explains what {BRAND} does —
-        and, more importantly, does not — do with your information. The short
+        Last updated: October 2026. This policy explains what {BRAND} does أ¢â‚¬â€‌
+        and, more importantly, does not أ¢â‚¬â€‌ do with your information. The short
         version: your images never leave your device, we do not require
         accounts, and we do not sell personal data.
       </p>
@@ -47,7 +48,7 @@ export default function PrivacyPage() {
       </h2>
       <p className="mt-3 leading-7 text-slate-600 dark:text-slate-300">
         {BRAND} itself sets no cookies and uses no browser storage of its own
-        for the tools — there is nothing to remember, because every setting
+        for the tools أ¢â‚¬â€‌ there is nothing to remember, because every setting
         lives only in the current page session. We do not set advertising or
         cross-site tracking cookies ourselves. However, third-party services
         described below may use cookies in your browser, and you can clear or
@@ -63,7 +64,7 @@ export default function PrivacyPage() {
         analytics that aggregate visits without building profiles of individual
         users. In the future, this site may also display advertisements through
         networks such as Google AdSense. Those advertising partners may use
-        cookies — including the Google DoubleClick cookie — to serve ads based
+        cookies أ¢â‚¬â€‌ including the Google DoubleClick cookie أ¢â‚¬â€‌ to serve ads based
         on your visits to this and other sites. You can opt out of personalized
         advertising through Google&apos;s Ads Settings or the Network
         Advertising Initiative opt-out page. Because ad providers operate under
@@ -89,14 +90,14 @@ export default function PrivacyPage() {
         {BRAND} is a general-purpose utility that does not knowingly collect
         personal information from children. Because the tools require no
         registration and process files locally, children can use them in the
-        same way as anyone else — no account, no stored files. If you believe a child has sent us
+        same way as anyone else أ¢â‚¬â€‌ no account, no stored files. If you believe a child has sent us
         personal information via the contact address, let us know and we will
         delete it promptly.
       </p>
 
       <h2 className="mt-8 text-xl font-semibold">7. Changes to this policy</h2>
       <p className="mt-3 leading-7 text-slate-600 dark:text-slate-300">
-        We may update this policy as the site evolves — for instance, if we add
+        We may update this policy as the site evolves أ¢â‚¬â€‌ for instance, if we add
         analytics tooling or begin serving ads. Any revision will be posted on
         this page with a new effective date. Continued use of the site after a
         change takes effect means you accept the updated policy.
@@ -114,6 +115,8 @@ export default function PrivacyPage() {
         </a>
         . We aim to answer every genuine privacy inquiry.
       </p>
-    </div>
+
+<section className="mt-10" aria-label="Practical reading"><ArticleAccordion title="A practical privacy check before editing a sensitive picture"><p>{"Local processing helps keep the selected image on your device, but it does not remove your responsibility for downloaded copies. Think about where the result will be saved, whether the device is shared and which application you will send it to next."}</p><p>{"Check the visible image itself before sharing. Cropping a frame may still leave names, addresses or documents in view. Treat the policy above as the reference for this website\u2019s data practices; the next service you use has its own policies."}</p></ArticleAccordion></section>
+</div>
   );
 }
