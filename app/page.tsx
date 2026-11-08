@@ -1,4 +1,3 @@
-import ArticleAccordion from "@/components/ArticleAccordion";
 import FirstFoldPromo from "@/components/FirstFoldPromo";
 import type { Metadata } from 'next'
 import Link from 'next/link'
@@ -274,7 +273,6 @@ export default function HomePage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(HOME_JSON_LD) }}
       />
 
-<section className="mt-10" aria-label="Practical reading"><ArticleAccordion title="Where should you start with an image that will not upload?"><p>{"An error that says \u201cfile too large\u201d usually points to bytes, while a request for width and height points to pixels. Check both before editing. If the shape is wrong, crop first; if the dimensions are too large, resize; if the file still exceeds the limit, compress the finished image."}</p><p>{"For a file that will not open or a format the destination rejects, start with conversion. Keep the original and check the downloaded copy before you submit it. You do not need to use every tool for every picture."}</p></ArticleAccordion></section>
 </div>
   )
 }
