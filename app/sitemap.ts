@@ -32,7 +32,19 @@ export default function sitemap(): MetadataRoute.Sitemap {
   // with Cache Components enabled.
   const previousUpdate = new Date("2026-10-08T00:00:00Z");
   const contentUpdate = new Date("2026-10-27T00:00:00Z");
-  const lastModified = (path: string) => UPDATED_PATHS.has(path) ? contentUpdate : previousUpdate;
+  // Content, guide navigation and structured data updated on this date.
+  // Keep this explicit; a build alone should not refresh lastmod.
+  const recentUpdate = new Date("2026-11-08T00:00:00Z");
+  const recentPaths = new Set([
+    "/",
+    "/convert-image",
+    ...GUIDE_PATHS,
+    ...CONVERT_PAIRS.map((pair) => pair.href),
+    ...LEGAL_PATHS.map((entry) => entry.path),
+  ]);
+  const lastModified = (path: string) => recentPaths.has(path)
+    ? recentUpdate
+    : UPDATED_PATHS.has(path) ? contentUpdate : previousUpdate;
   return [
     {
       url: SITE_URL,
