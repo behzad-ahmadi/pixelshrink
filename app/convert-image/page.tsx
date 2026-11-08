@@ -63,7 +63,7 @@ export default function ConvertImagePage() {
   return (
     <div className="mx-auto w-full max-w-4xl px-4 py-8 sm:px-6 sm:py-12">
       <Breadcrumbs
-        items={[{ label: "Home", href: "/" }, { label: "Convert Image" }]}
+        items={[{ label: "Convert Image" }]}
       />
       <header className="mt-4">
         <h1 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl dark:text-slate-100">

@@ -1,53 +1,8 @@
 import Link from "next/link";
-import { canonical } from "@/lib/site";
 import type { ToolLink } from "@/lib/site";
 
-export interface Crumb {
-  label: string;
-  href?: string;
-}
-
-export function Breadcrumbs({ items }: { items: Crumb[] }) {
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: items.map((item, index) => ({
-      "@type": "ListItem",
-      position: index + 1,
-      name: item.label,
-      ...(item.href ? { item: canonical(item.href) } : {}),
-    })),
-  };
-  return (
-    <>
-      <nav aria-label="Breadcrumb">
-        <ol className="flex flex-wrap items-center gap-1.5 text-sm text-slate-500 dark:text-slate-400">
-          {items.map((item, index) => {
-            const last = index === items.length - 1;
-            return (
-              <li key={item.label} className="flex items-center gap-1.5">
-                {index > 0 ? <span aria-hidden="true">/</span> : null}
-                {item.href && !last ? (
-                  <Link href={item.href} className="hover:text-blue-700 hover:underline dark:hover:text-blue-300">
-                    {item.label}
-                  </Link>
-                ) : (
-                  <span aria-current={last ? "page" : undefined} className={last ? "font-medium text-slate-800 dark:text-slate-100" : ""}>
-                    {item.label}
-                  </span>
-                )}
-              </li>
-            );
-          })}
-        </ol>
-      </nav>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
-    </>
-  );
-}
+export { default as Breadcrumbs } from "@/components/Breadcrumbs";
+export type { Crumb } from "@/components/Breadcrumbs";
 
 export interface FaqItem {
   question: string;

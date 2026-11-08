@@ -1,4 +1,5 @@
 import ArticleAccordion from "@/components/ArticleAccordion";
+import Breadcrumbs from "@/components/Breadcrumbs";
 import Link from "next/link";
 import { GUIDES } from "@/lib/guides";
 import { buildMetadata } from "@/lib/site";
@@ -7,6 +8,7 @@ export const metadata = buildMetadata({ title: "Image editing guides", descripti
 
 export default function GuidesPage() {
   return <div className="guide mx-auto max-w-4xl px-4 py-12">
+    <Breadcrumbs items={[{ label: "Guides" }]} />
     <h1>Image editing guides</h1>
     <p>Choose a workflow for your image format, pixel dimensions or upload limit.</p>
     <p><Link href="/guides/reduce-image-size-without-losing-quality">Reduce image size without visible quality loss</Link></p>

@@ -1,6 +1,7 @@
 import { ARTICLE_NOTES } from "@/lib/article-notes";
 import ArticleAccordion from "@/components/ArticleAccordion";
 import FirstFoldPromo from "@/components/FirstFoldPromo";
+import Breadcrumbs from "@/components/Breadcrumbs";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { GUIDES } from "@/lib/guides";
@@ -22,7 +23,7 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
   const guide = GUIDES.find((item) => item.slug === slug);
   if (!guide) notFound();
   return <article className="guide mx-auto max-w-3xl px-4 py-12">
-    <nav aria-label="Breadcrumb"><Link href="/">Home</Link> / <Link href="/guides">Image guides</Link></nav>
+    <Breadcrumbs items={[{ label: "Guides", href: "/guides" }, { label: guide.title }]} />
     <h1>{guide.title}</h1><p>{guide.intro}</p>
     <ArticleAccordion title="Practical example and workflow"><h2>Practical example</h2><p>{guide.example}</p>
     <h2>Workflow and checks</h2><p>{guide.workflow}</p>

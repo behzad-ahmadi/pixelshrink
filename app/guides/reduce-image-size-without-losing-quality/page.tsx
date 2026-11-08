@@ -85,8 +85,7 @@ export default function ReduceImageSizeGuidePage() {
     <div className="mx-auto w-full max-w-3xl px-4 py-8 sm:px-6 sm:py-12">
       <Breadcrumbs
         items={[
-          { label: "Home", href: "/" },
-          { label: "Guides", href: "/guides/reduce-image-size-without-losing-quality" },
+          { label: "Guides", href: "/guides" },
           { label: "Reduce image size without losing quality" },
         ]}
       />
