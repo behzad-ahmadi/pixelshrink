@@ -91,7 +91,7 @@ export default function ReduceImageSizeGuidePage() {
       />
       <header className="mt-4">
         <p className="text-sm font-semibold uppercase tracking-wide text-blue-700 dark:text-blue-400">
-          Guide آ· 10-minute read
+          Guide · 10-minute read
         </p>
         <h1 className="mt-2 text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl dark:text-slate-100">
           How to reduce image size without losing quality
@@ -127,7 +127,7 @@ export default function ReduceImageSizeGuidePage() {
         <h2 id="why-files-are-big">1. Why image files are bigger than they need to be</h2>
         <p>
           Three things determine how many bytes an image costs: pixel
-          dimensions, format, and compression level. A 4000 أ— 3000 photo
+          dimensions, format, and compression level. A 4000 × 3000 photo
           contains twelve million pixels; displayed at 800 pixels wide on a blog,
           roughly nine out of ten of those pixels are thrown away by the browser
           — yet you still paid to download all of them. Cameras and phones save

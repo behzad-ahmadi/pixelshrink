@@ -5,7 +5,7 @@ import ContactForm from "./contact-form";
 export const metadata = buildMetadata({
   title: "Contact",
   description:
-    "Contact PixelShrink: report a bug, request a feature, or ask a privacy question. The form opens your email app أ¢â‚¬â€‌ no account needed.",
+    "Contact PixelShrink: report a bug, request a feature, or ask a privacy question. The form opens your email app — no account needed.",
   path: "/contact",
 });
 
@@ -31,8 +31,8 @@ export default function ContactPage() {
         browser and operating system, the type and approximate size of the
         image, and the exact steps that led to the problem. Screenshots of any
         error are always welcome. For feature requests, describe the job you
-        are trying to get done أ¢â‚¬â€‌ for example, the upload limit you keep hitting
-        or the format your editor refuses to open أ¢â‚¬â€‌ rather than just naming a
+        are trying to get done — for example, the upload limit you keep hitting
+        or the format your editor refuses to open — rather than just naming a
         button you want. The underlying need often points to a better solution
         than the one first imagined.
       </p>
@@ -41,7 +41,7 @@ export default function ContactPage() {
         documents unless they are essential to the issue, and never send
         passwords. If your question is about advertising or data handling, our
         privacy policy already answers most common questions and is worth a
-        look first. For anything else, the form below is the fastest route أ¢â‚¬â€‌
+        look first. For anything else, the form below is the fastest route —
         or email us directly at{" "}
         <a
           className="font-medium text-slate-900 underline dark:text-slate-100"

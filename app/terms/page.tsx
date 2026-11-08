@@ -36,7 +36,7 @@ export default function TermsPage() {
         imagery intended to defraud, to process unlawful content, or to attempt
         to disrupt the site through abusive automated traffic, scraping at
         unreasonable rates, or probing for vulnerabilities. Because processing
-        is local, misuse of the tools themselves is your sole responsibility أ¢â‚¬â€‌
+        is local, misuse of the tools themselves is your sole responsibility —
         we have no technical ability to monitor what you do with files on your
         own machine, and we accept no liability for it.
       </p>
@@ -50,7 +50,7 @@ export default function TermsPage() {
         to link to our tools and share your results. You may not copy
         substantial portions of the site&apos;s original written content,
         present the tools as your own, or circumvent any technical measures
-        that protect the service. Your own images remain entirely yours أ¢â‚¬â€‌ we
+        that protect the service. Your own images remain entirely yours — we
         claim no rights over files you process, and since files never reach our
         servers, we never even possess them.
       </p>
@@ -87,8 +87,8 @@ export default function TermsPage() {
       <p className="mt-3 leading-7 text-slate-600 dark:text-slate-300">
         To the maximum extent permitted by law, {BRAND} and its operators are
         not liable for any indirect, incidental, consequential, special, or
-        exemplary damages أ¢â‚¬â€‌ including lost files, lost profits, or missed
-        deadlines أ¢â‚¬â€‌ arising from your use of or inability to use the service,
+        exemplary damages — including lost files, lost profits, or missed
+        deadlines — arising from your use of or inability to use the service,
         even if advised of the possibility of such damages. Our total liability
         for any claim related to the service is limited to the amount you paid
         to use it, which is zero.

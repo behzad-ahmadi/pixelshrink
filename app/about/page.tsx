@@ -16,8 +16,8 @@ export default function AboutPage() {
       </h1>
       <p className="mt-4 leading-7 text-slate-600 dark:text-slate-300">
         {BRAND} is a collection of free online image tools built around a
-        single promise: your files never leave your device. Every tool أ¢â‚¬â€‌
-        compression, resizing, cropping, and format conversion أ¢â‚¬â€‌ runs entirely
+        single promise: your files never leave your device. Every tool —
+        compression, resizing, cropping, and format conversion — runs entirely
         in your browser using modern web APIs. There is no upload step, no
         waiting queue, no account to create, and no server that ever sees your
         photos.
@@ -33,7 +33,7 @@ export default function AboutPage() {
         Your browser already has everything needed to decode, transform, and
         re-encode images, so {BRAND} does all of that work locally on your own
         machine. The result is faster processing, no upload bandwidth, and a
-        privacy story that is simple to verify أ¢â‚¬â€‌ disconnect from the internet
+        privacy story that is simple to verify — disconnect from the internet
         after the page loads and the tools keep working.
       </p>
 
@@ -45,8 +45,8 @@ export default function AboutPage() {
         portals, and upload limits. Resize photos to exact pixel dimensions with
         an aspect-ratio lock and handy presets for social media. Crop images to
         standard ratios like 1:1, 4:3, and 16:9 or a free selection of your own.
-        Convert between JPEG, PNG, and WebP أ¢â‚¬â€‌ including dedicated converters for
-        common pairs like WebP to JPG, PNG to JPG, and JPG to WebP أ¢â‚¬â€‌ without
+        Convert between JPEG, PNG, and WebP — including dedicated converters for
+        common pairs like WebP to JPG, PNG to JPG, and JPG to WebP — without
         installing desktop software.
       </p>
 
@@ -54,7 +54,7 @@ export default function AboutPage() {
       <p className="mt-3 leading-7 text-slate-600 dark:text-slate-300">
         Students squeezing a scanned signature under a portal limit, freelancers
         preparing marketplace listings, bloggers speeding up their pages, and
-        anyone who received a WebP download their editor refuses to open أ¢â‚¬â€‌ these
+        anyone who received a WebP download their editor refuses to open — these
         are the people {BRAND} is built for. Everything is free, works on both
         desktop and mobile browsers, and requires no sign-up. If a tool saves
         you time, the best thanks is telling someone else who fights the same
@@ -69,7 +69,7 @@ export default function AboutPage() {
         sliders actually do instead of promising magic. Third, keeping the core
         tools free and accessible without accounts, watermarks, or download
         caps. If you have feedback, a feature request, or found a bug, please
-        reach out through the contact page أ¢â‚¬â€‌ real user reports shape what gets
+        reach out through the contact page — real user reports shape what gets
         built next.
       </p>
 

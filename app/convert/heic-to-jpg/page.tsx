@@ -5,7 +5,7 @@ import { Breadcrumbs, Faq, RelatedLinks } from "@/components/page-bits";
 import { CONVERT_PAIRS, TOOLS, buildMetadata, canonical } from "@/lib/site";
 
 export const metadata: Metadata = buildMetadata({
-  title: "HEIC to JPG Converter â€” iPhone Photos to JPG Free",
+  title: "HEIC to JPG Converter — iPhone Photos to JPG Free",
   description:
     "Convert HEIC to JPG free in your browser. Turn iPhone photos into universal JPEGs. Private on-device decoding, no uploads.",
   path: "/convert/heic-to-jpg",
@@ -15,7 +15,7 @@ const FAQS = [
   {
     question: "Why does my iPhone save photos as HEIC?",
     answer:
-      "Since iOS 11, iPhones default to HEIC (High Efficiency Image Container) because it stores the same quality as JPEG in roughly half the bytes. That saves storage and bandwidth â€” but many Windows apps, upload portals, email clients, and web tools still cannot open HEIC, which is why converting to JPG is so often necessary.",
+      "Since iOS 11, iPhones default to HEIC (High Efficiency Image Container) because it stores the same quality as JPEG in roughly half the bytes. That saves storage and bandwidth — but many Windows apps, upload portals, email clients, and web tools still cannot open HEIC, which is why converting to JPG is so often necessary.",
   },
   {
     question: "How does HEIC to JPG conversion work here?",
@@ -25,29 +25,29 @@ const FAQS = [
   {
     question: "What quality should I use?",
     answer:
-      "Use 90â€“92% for everyday sharing â€” visually identical to the HEIC original. Raise to 95% for photos you plan to print or edit further, since HEIC already discarded some detail when the photo was taken and every extra generation costs a little more. Avoid going below 85% unless file size matters more than fidelity.",
+      "Use 90–92% for everyday sharing — visually identical to the HEIC original. Raise to 95% for photos you plan to print or edit further, since HEIC already discarded some detail when the photo was taken and every extra generation costs a little more. Avoid going below 85% unless file size matters more than fidelity.",
   },
   {
     question: "Will Live Photos or bursts convert too?",
     answer:
-      "Each conversion handles the still image in the .heic container. For Live Photos, your iPhone stores the still and the video segment together â€” export or share the still frame as a .heic first, then convert it here. Bursts save as a sequence of stills; convert each frame you want to keep.",
+      "Each conversion handles the still image in the .heic container. For Live Photos, your iPhone stores the still and the video segment together — export or share the still frame as a .heic first, then convert it here. Bursts save as a sequence of stills; convert each frame you want to keep.",
   },
   {
     question: "Do I lose quality converting HEIC to JPG?",
     answer:
-      "Barely. HEIC and JPG are both lossy, so re-encoding softens fine detail by a tiny amount â€” invisible at 90%+ for normal viewing. The HEIC original stays untouched on your phone, so you always keep the highest-quality master and convert copies for sharing.",
+      "Barely. HEIC and JPG are both lossy, so re-encoding softens fine detail by a tiny amount — invisible at 90%+ for normal viewing. The HEIC original stays untouched on your phone, so you always keep the highest-quality master and convert copies for sharing.",
   },
   {
     question: "Is my photo uploaded anywhere?",
     answer:
-      "No. Decoding and encoding both run locally on your device. No account, no queue, no file-size tricks â€” files up to 50MB are accepted and the download keeps your original filename with a .jpg extension.",
+      "No. Decoding and encoding both run locally on your device. No account, no queue, no file-size tricks — files up to 50MB are accepted and the download keeps your original filename with a .jpg extension.",
   },
 ];
 
 const JSON_LD = {
   "@context": "https://schema.org",
   "@type": "WebApplication",
-  name: "HEIC to JPG Converter â€” PixelShrink",
+  name: "HEIC to JPG Converter — PixelShrink",
   url: canonical("/convert/heic-to-jpg"),
   applicationCategory: "MultimediaApplication",
   operatingSystem: "Any",
@@ -72,7 +72,7 @@ export default function HeicToJpgPage() {
         </h1>
         <p className="mt-3 max-w-2xl text-base leading-relaxed text-slate-600 dark:text-slate-300">
           Turn iPhone HEIC photos into JPG files that open everywhere. Drop in
-          your .heic, pick a quality level, and download a universal .jpg â€”
+          your .heic, pick a quality level, and download a universal .jpg —
           decoded and encoded privately on your device.
         </p>
       </header>
@@ -107,11 +107,11 @@ export default function HeicToJpgPage() {
             },
             {
               title: "Half the size, double the hassle",
-              text: "HEIC's efficiency is real â€” same quality at half the bytes of JPG â€” but that advantage evaporates the moment you need to share outside Apple's ecosystem.",
+              text: "HEIC's efficiency is real — same quality at half the bytes of JPG — but that advantage evaporates the moment you need to share outside Apple's ecosystem.",
             },
             {
               title: "Printing expects JPG or PNG",
-              text: "Print shops, kiosks, and photo books universally accept JPG. A 92â€“95% quality JPG keeps iPhone prints sharp while staying compact.",
+              text: "Print shops, kiosks, and photo books universally accept JPG. A 92–95% quality JPG keeps iPhone prints sharp while staying compact.",
             },
           ].map((c) => (
             <div
@@ -157,10 +157,10 @@ export default function HeicToJpgPage() {
         </h2>
         <p className="mt-3 text-sm leading-relaxed text-slate-600 dark:text-slate-300">
           An iPhone HEIC photo is already efficiently packed: a 12MP shot that
-          would be a 5â€“6MB JPG often sits at 2â€“3MB as HEIC. Converting at 92%
+          would be a 5–6MB JPG often sits at 2–3MB as HEIC. Converting at 92%
           typically lands near the JPG-equivalent size with no visible change,
           because the HEIC master holds more detail than JPG can express. For
-          Live Photos, convert the still frame â€” the video segment stays in
+          Live Photos, convert the still frame — the video segment stays in
           your Photos library untouched. And keep the original .heic as your
           archive: convert copies for sharing, portals, and printing, but never
           delete the master until you are sure you will not need it again.

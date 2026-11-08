@@ -8,7 +8,7 @@ import { BRAND, CONVERT_PAIRS, TOOLS, buildMetadata, canonical } from "@/lib/sit
 export const metadata: Metadata = buildMetadata({
   title: "Convert Images: WebP, PNG & JPG in Browser",
   description:
-    "Free image converter â€” switch between WebP, PNG & JPG locally. No uploads, no watermarks, batch up to 10 files with ZIP download.",
+    "Free image converter — switch between WebP, PNG & JPG locally. No uploads, no watermarks, batch up to 10 files with ZIP download.",
   path: "/convert-image",
 });
 
@@ -21,7 +21,7 @@ const FAQS = [
   {
     question: "Does converting change image quality?",
     answer:
-      "Converting between lossy formats (JPG, WebP) re-encodes pixels, so a small quality loss is possible â€” keep quality at 85% or higher to stay visually identical. Converting to PNG is always lossless but usually produces larger files.",
+      "Converting between lossy formats (JPG, WebP) re-encodes pixels, so a small quality loss is possible — keep quality at 85% or higher to stay visually identical. Converting to PNG is always lossless but usually produces larger files.",
   },
   {
     question: "What happens to transparency when converting to JPG?",
@@ -36,19 +36,19 @@ const FAQS = [
   {
     question: "Can I convert HEIC photos from my iPhone?",
     answer:
-      "Yes. Drop a .heic or .heif file into the converter and it is decoded on your device into a JPEG-compatible image, then re-encoded to JPG, PNG, or WebP. iPhones shoot HEIC by default because it stores the same quality in roughly half the bytes of JPEG â€” but many portals, email clients, and Windows apps still reject it, so converting to JPG is the fastest fix.",
+      "Yes. Drop a .heic or .heif file into the converter and it is decoded on your device into a JPEG-compatible image, then re-encoded to JPG, PNG, or WebP. iPhones shoot HEIC by default because it stores the same quality in roughly half the bytes of JPEG — but many portals, email clients, and Windows apps still reject it, so converting to JPG is the fastest fix.",
   },
   {
     question: "Which quality setting should I use?",
     answer:
-      "For JPG and WebP output, 85â€“92% is the sweet spot: visually identical to the original for photos at a fraction of the size. Use 90%+ for images with text overlays or images you plan to edit further, and 75â€“80% for thumbnails where size matters more than perfection. PNG output is always lossless, so no quality setting applies.",
+      "For JPG and WebP output, 85–92% is the sweet spot: visually identical to the original for photos at a fraction of the size. Use 90%+ for images with text overlays or images you plan to edit further, and 75–80% for thumbnails where size matters more than perfection. PNG output is always lossless, so no quality setting applies.",
   },
 ];
 
 const JSON_LD = {
   "@context": "https://schema.org",
   "@type": "WebApplication",
-  name: "Convert Image â€” PixelShrink",
+  name: "Convert Image — PixelShrink",
   url: canonical("/convert-image"),
   applicationCategory: "MultimediaApplication",
   operatingSystem: "Any",
@@ -107,7 +107,7 @@ export default function ConvertImagePage() {
                 {pair.description}
               </p>
               <p className="mt-3 text-sm font-medium text-blue-700 dark:text-blue-400">
-                Open converter â†’
+                Open converter →
               </p>
             </Link>
           ))}
@@ -119,7 +119,7 @@ export default function ConvertImagePage() {
           id="compare-heading"
           className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl dark:text-slate-100"
         >
-          JPG vs PNG vs WebP vs HEIC â€” which to pick
+          JPG vs PNG vs WebP vs HEIC — which to pick
         </h2>
         <p className="mt-3 text-sm leading-relaxed text-slate-600 dark:text-slate-300">
           Every format is a different trade-off between size, quality, and
@@ -132,19 +132,19 @@ export default function ConvertImagePage() {
         <div className="mt-4 grid gap-4 sm:grid-cols-2">
           {[
             {
-              title: "JPG â€” universal compatibility",
+              title: "JPG — universal compatibility",
               text: "Opens everywhere: portals, email, printers, office software, and every phone from the last twenty years. Lossy compression keeps photos small. No transparency. Default choice when you are unsure where the file will end up.",
             },
             {
-              title: "PNG â€” lossless and transparent",
-              text: "Preserves every pixel exactly and supports alpha transparency, which makes it ideal for logos, icons, and screenshots with text. The price is size: photographic PNGs are often 5â€“10x larger than the same image as JPG.",
+              title: "PNG — lossless and transparent",
+              text: "Preserves every pixel exactly and supports alpha transparency, which makes it ideal for logos, icons, and screenshots with text. The price is size: photographic PNGs are often 5–10x larger than the same image as JPG.",
             },
             {
-              title: "WebP â€” smallest for the web",
-              text: "Google's modern codec is typically 25â€“35% smaller than JPG at equal quality, supports transparency, and renders in all current browsers. Best for site images, avatars, and thumbnails where you control the destination.",
+              title: "WebP — smallest for the web",
+              text: "Google's modern codec is typically 25–35% smaller than JPG at equal quality, supports transparency, and renders in all current browsers. Best for site images, avatars, and thumbnails where you control the destination.",
             },
             {
-              title: "HEIC â€” iPhone default, convert it",
+              title: "HEIC — iPhone default, convert it",
               text: "Apple's High Efficiency format stores excellent quality in tiny files, but Windows apps, upload forms, and many web tools reject it. Convert HEIC to JPG the moment you need to share, print, or upload.",
             },
           ].map((c) => (
@@ -168,14 +168,14 @@ export default function ConvertImagePage() {
         </h2>
         <p className="mt-3 text-sm leading-relaxed text-slate-600 dark:text-slate-300">
           The quality slider is the single biggest lever on file size. For JPG
-          and WebP output, 85â€“92% is visually identical to the original for
-          almost every photo â€” differences only appear when pixel-peeping at
+          and WebP output, 85–92% is visually identical to the original for
+          almost every photo — differences only appear when pixel-peeping at
           200% zoom. Each 5-point drop below 80% roughly halves the remaining
           quality headroom, so move in small steps: convert once at 90%, check
           the result, and only go lower if the file is still too big. Avoid
-          converting the same file twice (JPG â†’ WebP â†’ JPG), because every
+          converting the same file twice (JPG → WebP → JPG), because every
           lossy generation discards fresh detail. When transparency matters,
-          choose PNG or WebP instead of JPG â€” flattening an alpha channel onto
+          choose PNG or WebP instead of JPG — flattening an alpha channel onto
           white is irreversible, so keep a transparent master copy before you
           convert.
         </p>
@@ -198,7 +198,7 @@ export default function ConvertImagePage() {
             {
               step: "2",
               title: "Pick a format",
-              text: "Select JPG, PNG, or WebP and set quality (85â€“92% is the sweet spot).",
+              text: "Select JPG, PNG, or WebP and set quality (85–92% is the sweet spot).",
             },
             {
               step: "3",
