@@ -1,5 +1,6 @@
 import { ARTICLE_NOTES } from "@/lib/article-notes";
 import ArticleAccordion from "@/components/ArticleAccordion";
+import FirstFoldPromo from "@/components/FirstFoldPromo";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { GUIDES } from "@/lib/guides";
@@ -29,5 +30,6 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
     <h2>Before submitting your image</h2><p>Open the downloaded file and confirm its format, dimensions and byte size. Inspect small text and edges at full size. Keep the original so another export does not require recompressing a lossy copy.</p>
     {ARTICLE_NOTES[guide.tool]?.map((section) => <section key={section.title}><h2>{section.title}</h2>{section.paragraphs.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}</section>)}</ArticleAccordion>
     <h2>Related guides</h2><ul>{GUIDES.filter((item) => item.slug !== slug && item.tool.includes("convert") === guide.tool.includes("convert")).map((item) => <li key={item.slug}><Link href={`/guides/${item.slug}`}>{item.title}</Link></li>)}</ul>
+    {["jpg-to-webp-for-websites", "choose-image-format", "image-compression-quality-settings"].includes(slug) && <FirstFoldPromo />}
   </article>;
 }

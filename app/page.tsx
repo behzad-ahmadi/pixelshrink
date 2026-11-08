@@ -1,4 +1,5 @@
 import ArticleAccordion from "@/components/ArticleAccordion";
+import FirstFoldPromo from "@/components/FirstFoldPromo";
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { Faq } from '@/components/page-bits'
@@ -265,6 +266,7 @@ export default function HomePage() {
           </div>
 
           <Faq items={HOME_FAQS} />
+          <FirstFoldPromo />
         </div>
       </section>
       <script

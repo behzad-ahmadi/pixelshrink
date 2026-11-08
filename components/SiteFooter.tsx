@@ -20,6 +20,10 @@ export default function SiteFooter() {
               {CONTACT_EMAIL}
             </a>
           </p>
+          <p className="mt-4 text-sm leading-relaxed text-slate-600 dark:text-slate-300">
+            Need a landing page?{" "}
+            <a href="https://www.firstfold.dev/?utm_source=pixelshrink&utm_medium=referral&utm_campaign=footer" className="font-medium text-blue-700 hover:underline dark:text-blue-300">Explore First Fold Studio</a>
+          </p>
         </div>
 
         <nav aria-label="Tools">

@@ -1,4 +1,5 @@
 import ArticleAccordion from "@/components/ArticleAccordion";
+import FirstFoldPromo from "@/components/FirstFoldPromo";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Breadcrumbs, Faq } from "@/components/page-bits";
@@ -303,6 +304,7 @@ export default function ReduceImageSizeGuidePage() {
       </aside>
 
       <Faq items={GUIDE_FAQS} />
+      <FirstFoldPromo />
 
       <p className="mt-8 text-xs text-slate-400 dark:text-slate-500">
         Source: {SITE_URL}
